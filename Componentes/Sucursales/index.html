@@ -1,20 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pizza & Love - Sucursales</title>
+
+    <!-- Navegación -->
     <link rel="stylesheet" href="../Nav/nav.css">
     <script>
         fetch("../Nav/nav.html")
-        .then(Response => Response.text())
-        .then(data => document.getElementById("navbar").innerHTML = data)
-        .catch(err => console.log(err))
+            .then(Response => Response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data)
+            .catch(err => console.log(err));
     </script>
+
+    <!-- Resto de los estilos -->
+    <link rel="stylesheet" href="lib/leaflet-1.9.4/leaflet.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <nav id="navbar"></nav>
     </header>
+
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <h2>Nuestras Sucursales</h2>
+            
+            <!-- Sucursal 5y10 -->
+            <div class="location-card" data-lat="32.498548715618846" data-lng="-116.96639865953074">
+                <h3>5y10</h3>
+                <span class="status-badge status-open">🟢 Abierto</span>
+                <div class="location-info">
+                    <div class="rating">★ 4.6 (238 reseñas)</div>
+                    <div>📍 Av. Paseo Del Río 123, Tijuana, BC</div>
+                    <div>📞 +52 661 234 5678</div>
+                    <div>🕐 12:00 - 23:00</div>
+                </div>
+            </div>
+
+            <!-- Sucursal Casa Blanca -->
+            <div class="location-card" data-lat="32.50159887220272" data-lng="-116.89754779074997">
+                <h3>Casa Blanca</h3>
+                <span class="status-badge status-open">🟢 Abierto</span>
+                <div class="location-info">
+                    <div class="rating">★ 4.4 (52 reseñas)</div>
+                    <div>📍 Calle Ejemplo 456, Tijuana, BC</div>
+                    <div>📞 +52 661 234 5000</div>
+                    <div>🕐 09:00 - 21:00</div>
+                </div>
+            </div>
+
+            <!-- Sucursal Revolución -->
+            <div class="location-card" data-lat="32.52984863854589" data-lng="-117.03599228704998">
+                <h3>Revolución</h3>
+                <span class="status-badge status-open">🟢 Abierto</span>
+                <div class="location-info">
+                    <div class="rating">★ 4.5 (183 reseñas)</div>
+                    <div>📍 Blvd. Agua Caliente 123, Tijuana, BC</div>
+                    <div>📞 +52 664 123 4567</div>
+                    <div>🕐 11:00 - 22:00</div>
+                </div>
+            </div>
+
+            <!-- Sucursal Las Américas -->
+            <div class="location-card" data-lat="32.50387096456004" data-lng="-116.98955285821424">
+                <h3>Las Américas</h3>
+                <span class="status-badge status-open">🟢 Abierto</span>
+                <div class="location-info">
+                    <div class="rating">★ 4.7 (310 reseñas)</div>
+                    <div>📍 Plaza Las Américas, Tijuana, BC</div>
+                    <div>📞 +52 664 104 1080</div>
+                    <div>🕐 10:00 - 22:00</div>
+                </div>
+            </div>
+
+            <!-- Sucursal Guaycura -->
+            <div class="location-card" data-lat="32.50622096783539" data-lng="-116.91733985636424">
+                <h3>Guaycura</h3>
+                <span class="status-badge status-open">🟢 Abierto</span>
+                <div class="location-info">
+                    <div class="rating">★ 4.6 (189 reseñas)</div>
+                    <div>📍 Plaza Guaycura, Tijuana, BC</div>
+                    <div>📞 +52 664 104 1080</div>
+                    <div>🕐 10:00 - 22:00</div>
+                </div>
+            </div>
+
+            <!-- Sucursal Playas -->
+            <div class="location-card" data-lat="32.527258409247196" data-lng="-117.11746275342861">
+                <h3>Playas</h3>
+                <span class="status-badge status-open">🟢 Abierto</span>
+                <div class="location-info">
+                    <div class="rating">★ 4.5 (142 reseñas)</div>
+                    <div>📍 Playas de Tijuana, BC</div>
+                    <div>📞 +52 664 104 1080</div>
+                    <div>🕐 10:00 - 22:00</div>
+                </div>
+            </div>
+
+            <!-- Sucursal Paseo del Río -->
+            <div class="location-card" data-lat="32.47813331799085" data-lng="-116.92613187540711">
+                <h3>Paseo del Río</h3>
+                <span class="status-badge status-open">🟢 Abierto</span>
+                <div class="location-info">
+                    <div class="rating">★ 4.8 (267 reseñas)</div>
+                    <div>📍 Paseo del Río, Tijuana, BC</div>
+                    <div>📞 +52 664 104 1080</div>
+                    <div>🕐 10:00 - 22:00</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="map"></div>
+    </div>
+
+    <!-- Corregir rutas de JavaScript -->
+    <script src="lib/leaflet-1.9.4/leaflet-src.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
