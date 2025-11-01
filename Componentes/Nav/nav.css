@@ -25,6 +25,302 @@ body{
 height: 55px;
 width: 55px;
 cursor: pointer;
-margin-left: 80px;
+margin-left: 0px;
 }
 
+.hamburger {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 3px;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.cart-icon {
+    display: none;
+    cursor: pointer;
+}
+
+.nav-links {
+    display: flex;
+    gap: 150px;
+    list-style: none;
+    margin: 0;
+    margin-right: 300px;
+    padding: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #fcf315;
+}
+
+@media (max-width: 1024px) {
+    .nav-container {
+        padding: 15px 30px;
+    }
+    
+    .logo-container {
+        margin-left: 40px;
+    }
+    
+    .logo {
+        height: 50px;
+        width: 50px;
+    }
+    
+    .nav-links {
+        gap: 80px;
+        margin-right: 100px;
+    }
+    
+    .nav-links a {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 15px 20px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .cart-icon {
+        display: block;
+    }
+
+    .logo-container {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-left: 0;
+    }
+
+    .logo {
+        height: 45px;
+        width: 45px;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.98);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 70px;
+        transition: left 0.3s ease;
+        z-index: 1000;
+        padding: 0;
+        margin: 0;
+        padding-top: 180px; /* 🔥 AUMENTADO: Más espacio para separar logo del MENÚ */
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links a {
+        font-size: 32px;
+        font-weight: 600;
+        padding: 15px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 12px 15px;
+    }
+
+    .logo {
+        height: 40px;
+        width: 40px;
+    }
+
+    .hamburger span {
+        width: 22px;
+    }
+
+    .cart-icon svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    .nav-links {
+        width: 70%;
+        gap: 65px;
+        padding-top: 170px; /* 🔥 AUMENTADO: Más espacio en móviles */
+    }
+
+    .nav-links a {
+        font-size: 30px;
+        font-weight: 600;
+    }
+}
+
+/* 🔥 LOGO MÁS SEPARADO DEL TEXTO MENÚ */
+.menu-logo-item {
+    position: absolute;
+    top: 60px; /* 🔥 BAJÉ el logo para más separación del borde superior */
+    left: 0;
+    right: 0;
+    text-align: center;
+    list-style: none;
+    z-index: 1002;
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 120px; /* 🔥 AUMENTADO: Mucha más separación del texto MENÚ */
+}
+
+.menu-logo-item .logo {
+    height: 90px;
+    width: 90px;
+    margin: 0 auto;
+    display: block;
+}
+
+@media (max-width: 480px) {
+    .menu-logo-item {
+        top: 50px; /* 🔥 BAJÉ el logo en móviles */
+        margin-bottom: 110px; /* 🔥 AUMENTADO: Más separación en móviles */
+    }
+    
+    .menu-logo-item .logo {
+        height: 80px;
+        width: 80px;
+    }
+}
+
+/* 🔥 PARA MÓVILES MUY PEQUEÑOS */
+@media (max-width: 360px) {
+    .menu-logo-item .logo {
+        height: 75px;
+        width: 75px;
+    }
+    
+    .nav-links {
+        gap: 60px;
+        padding-top: 160px; /* 🔥 AUMENTADO: Más espacio */
+    }
+    
+    .nav-links a {
+        font-size: 28px;
+    }
+    
+    .menu-logo-item {
+        top: 45px; /* 🔥 BAJÉ el logo */
+        margin-bottom: 100px; /* 🔥 AUMENTADO: Más separación */
+    }
+}
+
+/* 🔥 FACEBOOK BIEN CENTRADO Y SEPARADO DEL BORDE */
+.facebook-menu-item {
+    list-style: none;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.facebook-menu-item a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 26px;
+    font-weight: 600;
+    transition: color 0.3s;
+    padding: 12px 25px;
+    border-radius: 8px;
+}
+
+.facebook-menu-item a:hover {
+    color: #1877f2;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.facebook-menu-item svg {
+    width: 30px;
+    height: 30px;
+    transition: fill 0.3s;
+}
+
+.facebook-menu-item a:hover svg {
+    fill: #1877f2;
+}
+
+/* 🔥 FACEBOOK DESKTOP */
+.facebook-icon {
+    position: absolute;
+    right: 120px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.facebook-icon a {
+    display: block;
+    transition: transform 0.3s;
+}
+
+.facebook-icon a:hover {
+    transform: scale(1.1);
+}
+
+.facebook-icon svg {
+    width: 30px;
+    height: 30px;
+    transition: fill 0.3s;
+}
+
+.facebook-icon a:hover svg {
+    fill: #1877f2;
+}
+
+/* 🔥 RESPONSIVE FACEBOOK */
+@media (max-width: 768px) {
+    .facebook-icon {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .facebook-menu-item {
+        display: none;
+    }
+}

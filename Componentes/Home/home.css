@@ -1,8 +1,13 @@
 body{
     background-image: url("../../Img/Fondo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     height: 100vh;
     margin: 0;
     position: relative;
+    overflow: hidden;
+    padding-top: 100px;
 }
 
 body::before {
@@ -11,90 +16,354 @@ body::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 1200px; /* Ajusta según el tamaño de tu imagen */
-    height: 1200px; /* Ajusta según el tamaño de tu imagen */
+    width: min(1200px, 90vw);
+    height: min(1200px, 90vw);
     background-image: url("../../Img/919-392w.png");
-    background-size: contain; /* Mantiene proporciones originales */
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     z-index: -1;
     opacity: 0.6;
+    pointer-events: none;
 }
 
-/* El resto de tu CSS se mantiene igual */
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+    height: auto;
+}
+
 body > * {
     position: relative;
     z-index: 1;
 }
+
 .logo1{
-    height: 172px;
-    width: 463px;
+    height: auto;
+    width: min(463px, 90vw);
+    max-height: 172px;
+    object-fit: contain;
 }
+
 .Logo1-Contenedor{
-    height: 40%;
+    height: 22vh;
+    min-height: 120px;
     align-items: center;
     justify-content: center;
     display: flex;
     text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
 }
+
 .boton{
     height: 53px;
-    width: 280.55px;
+    width: min(280.55px, 80vw);
     border-radius: 20px;
     background-color: transparent;
     border: 2px solid #ffffff;
-    transition: all 0.3s ease; /* Agregar transición suave */
+    transition: all 0.3s ease;
 }
+
 .boton-contenedor{
-    height: 20%;
+    height: 20vh;
+    min-height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 15px;
+    box-sizing: border-box;
 }
+
 .boton a {
-    color: white;             /* texto blanco */
-    text-decoration: none;    /* quita el subrayado */
-    font-size: 18px;          /* opcional, ajusta tamaño */
-    font-weight: bold;        /* opcional, para hacerlo más visible */
-    display: flex;            /* Para que ocupe todo el botón */
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
-    transition: all 0.3s ease; /* Transición también para el texto */
+    transition: all 0.3s ease;
 }
 
-/* Hover en el botón */
 .boton:hover {
-    background-color: white; /* Fondo blanco completo */
-    border-color: white;     /* Borde blanco para coincidir */
+    background-color: white;
+    border-color: white;
 }
 
-/* Hover en el enlace dentro del botón */
 .boton:hover a {
-    color: rgb(255, 0, 0);   /* Texto rojo cuando el botón tiene hover */
+    color: rgb(255, 0, 0);
 }
 
 .iconos-contenedor{
-    height: 20%;
+    height: 22vh;
+    min-height: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 70px;
+    gap: min(70px, 5vw);
+    padding: 20px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
 }
 
 .icono-aplic{
-    height: 80px;
-    width: 80px;
+    height: min(80px, 15vw);
+    width: min(80px, 15vw);
+    min-height: 50px;
+    min-width: 50px;
+    object-fit: contain;
 }
+
 .texto-contenedor{
-    height: 5%;
+    height: 10vh;
+    min-height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-h2{
-    color: white;
-    font-size: 30px;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    text-align: center;
 }
 
+h2{
+    color: white;
+    font-size: min(30px, 6vw);
+    margin: 0;
+    text-align: center;
+    line-height: 1.3;
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    body {
+        padding-top: 80px;
+        height: calc(100vh - 80px);
+        overflow: hidden;
+    }
+    
+    .Logo1-Contenedor {
+        height: 22vh; 
+        min-height: 120px;
+        padding: 15px;
+        margin-top: 20px; 
+    }
+    
+    .logo1 {
+        max-height: 110px;
+    }
+    
+    .boton-contenedor {
+        height: 28vh;
+        min-height: 140px;
+        padding: 25px;
+        margin-top: 30px;
+    }
+    
+    .boton {
+        height: 50px;
+        width: min(260px, 85vw);
+    }
+    
+    .iconos-contenedor {
+        height: 28vh;
+        min-height: 140px;
+        gap: 45px;
+        padding: 25px;
+        margin-top: 20px;
+    }
+    
+    .icono-aplic {
+        height: min(70px, 16vw);
+        width: min(70px, 16vw);
+        min-height: 55px;
+        min-width: 55px;
+    }
+    
+    .texto-contenedor {
+        height: 15vh;
+        min-height: 70px;
+        padding: 20px 15px;
+    }
+    
+    h2 {
+        font-size: min(20px, 5.5vw);
+        line-height: 1.3;
+    }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+    body {
+        padding-top: 70px;
+        height: calc(100vh - 70px);
+        overflow: hidden;
+    }
+    
+    .Logo1-Contenedor {
+        height: 20vh;
+        min-height: 100px;
+        padding: 12px;
+        margin-top: 25px;
+    }
+    
+    .logo1 {
+        max-height: 90px;
+        width: min(300px, 85vw);
+    }
+    
+    .boton-contenedor {
+        height: 28vh; 
+        min-height: 130px;
+        padding: 20px;
+        margin-top: 35px; 
+    }
+    
+    .boton {
+        height: 48px;
+        width: min(240px, 85vw);
+        border-radius: 15px;
+    }
+    
+    .boton a {
+        font-size: 16px;
+    }
+    
+    .iconos-contenedor {
+        height: 28vh;
+        min-height: 130px;
+        gap: 35px;
+        padding: 22px;
+        margin-top: 25px;
+    }
+    
+    .icono-aplic {
+        height: min(60px, 18vw);
+        width: min(60px, 18vw);
+        min-height: 45px;
+        min-width: 45px;
+    }
+    
+    .texto-contenedor {
+        height: 18vh;
+        min-height: 80px;
+        padding: 25px 10px;
+    }
+    
+    h2 {
+        font-size: min(16px, 4.5vw);
+        line-height: 1.2;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 360px) {
+    body {
+        padding-top: 65px;
+        height: calc(100vh - 65px);
+    }
+    
+    .Logo1-Contenedor {
+        height: 18vh;
+        min-height: 90px;
+        margin-top: 20px;
+    }
+    
+    .logo1 {
+        max-height: 80px;
+    }
+    
+    .boton-contenedor {
+        height: 26vh;
+        min-height: 120px;
+        margin-top: 30px;
+    }
+    
+    .iconos-contenedor {
+        height: 26vh;
+        min-height: 120px;
+        gap: 25px;
+        margin-top: 20px;
+    }
+    
+    .texto-contenedor {
+        height: 16vh;
+        min-height: 70px;
+    }
+    
+    h2 {
+        font-size: min(14px, 4vw);
+    }
+}
+
+/* 🔥 PANTALLAS ALTAS - LOGO Y BOTÓN MÁS ABAJO TAMBIÉN */
+@media (max-width: 768px) and (min-height: 700px) {
+    .Logo1-Contenedor {
+        height: 20vh;
+        margin-top: 30px;
+    }
+    
+    .boton-contenedor {
+        height: 28vh;
+        margin-top: 40px;
+    }
+    
+    .iconos-contenedor {
+        height: 30vh;
+        margin-top: 30px;
+    }
+    
+    .texto-contenedor {
+        height: 16vh;
+    }
+}
+
+@media (max-width: 768px) and (min-height: 800px) {
+    .Logo1-Contenedor {
+        height: 18vh;
+        margin-top: 35px;
+    }
+    
+    .boton-contenedor {
+        height: 26vh;
+        margin-top: 45px;
+    }
+    
+    .iconos-contenedor {
+        height: 28vh;
+        margin-top: 35px;
+    }
+    
+    .texto-contenedor {
+        height: 20vh;
+    }
+}
+
+/* Pantallas grandes de escritorio */
+@media (min-height: 800px) {
+    body {
+        height: 100vh;
+        overflow: hidden;
+    }
+    
+    .Logo1-Contenedor {
+        height: 20vh;
+    }
+    
+    .boton-contenedor {
+        height: 22vh;
+    }
+    
+    .iconos-contenedor {
+        height: 24vh;
+    }
+    
+    .texto-contenedor {
+        height: 12vh;
+    }
+}
