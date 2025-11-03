@@ -8,6 +8,7 @@ body{
   align-items: center;
   background: black;
   padding: 10px 40px;
+  position: relative; /* 🔥 AGREGADO: Para que el Facebook se posicione correctamente */
 
 }
 .nav-links {
@@ -148,7 +149,7 @@ margin-left: 0px;
         z-index: 1000;
         padding: 0;
         margin: 0;
-        padding-top: 180px; /* 🔥 AUMENTADO: Más espacio para separar logo del MENÚ */
+        padding-top: 180px;
     }
 
     .nav-links.active {
@@ -184,7 +185,7 @@ margin-left: 0px;
     .nav-links {
         width: 70%;
         gap: 65px;
-        padding-top: 170px; /* 🔥 AUMENTADO: Más espacio en móviles */
+        padding-top: 170px;
     }
 
     .nav-links a {
@@ -193,31 +194,38 @@ margin-left: 0px;
     }
 }
 
-/* 🔥 LOGO MÁS SEPARADO DEL TEXTO MENÚ */
+/* 🔥 LOGO SOLO EN MÓVIL - OCULTAR EN DESKTOP */
 .menu-logo-item {
-    position: absolute;
-    top: 60px; /* 🔥 BAJÉ el logo para más separación del borde superior */
-    left: 0;
-    right: 0;
-    text-align: center;
-    list-style: none;
-    z-index: 1002;
-    margin: 0 auto;
-    width: 100%;
-    margin-bottom: 120px; /* 🔥 AUMENTADO: Mucha más separación del texto MENÚ */
+    display: none;
 }
 
-.menu-logo-item .logo {
-    height: 90px;
-    width: 90px;
-    margin: 0 auto;
-    display: block;
+@media (max-width: 768px) {
+    .menu-logo-item {
+        display: block;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        list-style: none;
+        z-index: 1002;
+        margin: 0 auto;
+        width: 100%;
+        margin-bottom: 120px;
+    }
+
+    .menu-logo-item .logo {
+        height: 90px;
+        width: 90px;
+        margin: 0 auto;
+        display: block;
+    }
 }
 
 @media (max-width: 480px) {
     .menu-logo-item {
-        top: 50px; /* 🔥 BAJÉ el logo en móviles */
-        margin-bottom: 110px; /* 🔥 AUMENTADO: Más separación en móviles */
+        top: 50px;
+        margin-bottom: 110px;
     }
     
     .menu-logo-item .logo {
@@ -235,7 +243,7 @@ margin-left: 0px;
     
     .nav-links {
         gap: 60px;
-        padding-top: 160px; /* 🔥 AUMENTADO: Más espacio */
+        padding-top: 160px;
     }
     
     .nav-links a {
@@ -243,8 +251,8 @@ margin-left: 0px;
     }
     
     .menu-logo-item {
-        top: 45px; /* 🔥 BAJÉ el logo */
-        margin-bottom: 100px; /* 🔥 AUMENTADO: Más separación */
+        top: 45px;
+        margin-bottom: 100px;
     }
 }
 
@@ -285,7 +293,7 @@ margin-left: 0px;
     fill: #1877f2;
 }
 
-/* 🔥 FACEBOOK DESKTOP */
+/* 🔥 FACEBOOK DESKTOP - CORREGIDO */
 .facebook-icon {
     position: absolute;
     right: 120px;

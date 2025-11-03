@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pizza&Love</title>
     <link rel="stylesheet" href="../Nav/nav.css">
-    <script src="/Componentes/Acerca-De/acerca-de.js"></script>
+    <link rel="stylesheet" href="Acerca-De.css">
     <script>
         fetch("../Nav/nav.html")
         .then(Response => Response.text())
@@ -15,9 +14,34 @@
     </script>
 </head>
 <body>
-    <header>
+    
+     <header>
         <nav id="navbar"></nav>
     </header>
-    <script src="./acerca-de.js"></script>
+
+    <div class="titulo">AMOR A PRIMERA<br>
+        <span class="centrado">PIZZA</span>
+    </div>    
+    
+    <section class="contenido">
+
+        <div class="contenedor">
+            <div class="texto-info">
+                <p>En Pizza & Love traemos para ti las mejor pizza de Tijuana y Rosarito desde 1998. Estamos comprometidos y enamorados con lo que hacemos. Lo puedes comprobar en cada sabor y cada mordida.</p>
+
+                <p>Garantizamos la calidad de nuestros productos para que pases siempre los mejores momentos con amistades o familia.</p>
+
+                <p>En Pizza & Love te damos las gracias por tu preferencia .</p>
+            </div>
+        </div>
+
+        <div class="imagenes">
+            <img src="/Img/local.jpeg" class="imagen-local">
+            <img src="/Img/pizza.jpeg" class="imagen-persona">
+            <img src="/Img/pizza-image.jpeg" class="imagen-pizza">
+        </div>
+    </section>
+
+     <script src="Acerca-De.js"></script>
 </body>
 </html>
