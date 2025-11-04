@@ -261,6 +261,13 @@ const menuData = {
                 { name: 'Mega', size: '18"', price: 299 },
                 { name: 'Gigante', size: '28"', price: 549 }
             ],
+            options: [
+                {
+                    type: 'Pan delgado',
+                    choices: ['Si', 'No'],
+                    required: false
+                }
+            ],
             extras: [
                 { name: 'Queso Extra', prices: [32, 42, 56, 62, 99] },
                 { name: 'Orilla de Queso', prices: [0, 42, 56, 62, 99] },
@@ -339,8 +346,24 @@ const menuData = {
         },
     ],
     alitas: [
-        { id: 'alitas-1', name: 'Alitas Medianas', description: 'BBQ, Picosa o Mango Habanero.', image:'./image/alitasYpapas/medianas.png', price: 179, weight: '480g' },
-        { id: 'alitas-2', name: 'Alitas Grandes', description: 'BBQ, Picosa o Mango Habanero.', image:'./image/alitasYpapas/grandes.png', price: 329, weight: '960g' },
+        { id: 'alitas-1', name: 'Alitas Medianas', description: 'BBQ, Picosa o Mango Habanero.', image:'./image/alitasYpapas/medianas.png', price: 179, weight: '480g', 
+            options: [ 
+                {
+                type: 'Salsa', 
+                choices: ['BBQ', 'Picosa', 'Mango Habanero'],
+                required: true 
+                }
+            ]
+        },
+        { id: 'alitas-2', name: 'Alitas Grandes', description: 'BBQ, Picosa o Mango Habanero.', image:'./image/alitasYpapas/grandes.png', price: 329, weight: '960g', 
+            options: [ 
+                {
+                type: 'Salsa', 
+                choices: ['BBQ', 'Picosa', 'Mango Habanero'],
+                required: true 
+                }
+            ]
+        },
         { id: 'alitas-3', name: 'Papotas', description: 'Papas en gajos sazonadas con porción de cátsup.', image:'./image/alitasYpapas/papas.png', price: 69, weight: '300g' }
     ],
     ensaladas: [
@@ -366,9 +389,25 @@ const menuData = {
     ],
     bebidas: [
         { id: 'beb-1', name: 'Soda de 355 ml', description: 'Coca Cola.', image:'./image/bebidas/355.png', price: 20 },
-        { id: 'beb-2', name: 'Soda de 2 Litros', description: 'Coca Cola, Coca Light, Sprite o Manzana.', image:'./image/bebidas/2l.png', price: 54 },
+        { id: 'beb-2', name: 'Soda de 2 Litros', description: 'Coca Cola, Coca Light, Sprite o Manzana.', image:'./image/bebidas/2l.png', price: 54, 
+            options: [ 
+                {
+                type: 'Sabor', 
+                choices: ['Coca cola', 'Coca Light', 'Sprite', 'Manzana'],
+                required: true 
+                }
+            ]
+        },
         { id: 'beb-3', name: 'Soda de 600 ml', description: 'Coca Cola.', image:'./image/bebidas/600.png', price: 30 },
-        { id: 'beb-4', name: 'Fuze Té 600 ml', description: 'Durazno, verde o negro.', image:'./image/bebidas/fuze.png', price: 30 },
+        { id: 'beb-4', name: 'Fuze Té 600 ml', description: 'Durazno, verde o negro.', image:'./image/bebidas/fuze.png', price: 30, 
+            options: [ 
+                {
+                type: 'Sabor', 
+                choices: ['Té de Durazno', 'Té verde', 'Té negro'],
+                required: true 
+                }
+            ]
+        },
         { id: 'beb-5', name: 'Agua Embotellada', description: 'Ciel de 1 litro.', image:'./image/bebidas/ciel.png', price: 22 }
     ]
 };
