@@ -19,7 +19,24 @@ document.addEventListener('DOMContentLoaded', () => {
     floatingCart = document.getElementById('floatingCart');
 
     setupTabs();
-    renderCategory('promociones');
+    
+    // Leer el hash de la URL y activar la tab correspondiente si existe
+    const hash = window.location.hash.substring(1); // Obtiene el hash sin el '#', ej. "pizzas"
+    if (hash) {
+        const tabButton = document.querySelector(`.tab[data-category="${hash}"]`);
+        if (tabButton) {
+            // Cambia la categoría actual y simula un clic para activar la tab
+            currentCategory = hash;
+            tabButton.click(); // Esto activa la tab y renderiza el contenido
+        } else {
+            // Si el hash no coincide, renderiza la categoría por defecto
+            renderCategory('promociones');
+        }
+    } else {
+        // Si no hay hash, renderiza la categoría por defecto
+        renderCategory('promociones');
+    }
+    
     setupModalListeners();
 });
 
