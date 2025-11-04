@@ -122,6 +122,7 @@ body {
     gap: 1rem;
     align-items: start;
     overflow: hidden;
+    flex: 1; /* Asegura que ocupe el espacio disponible */
 }
 
 .promo-icon {
@@ -140,6 +141,8 @@ body {
 .promo-content {
     flex: 1;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .promo-content h3 {
@@ -158,10 +161,14 @@ body {
     font-size: 0.75rem;
     color: #6b7280;
     white-space: pre-line;
+    flex: 1; /* Hace que ocupe espacio y empuje el footer abajo */
 }
 
 .promo-footer {
     margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Para que margin-top: auto funcione */
 }
 
 .price {
@@ -169,7 +176,7 @@ body {
     font-weight: bold;
     color: #fb0404;
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0; /* Removido para evitar pegado */
 }
 
 .add-btn {
@@ -186,6 +193,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 0.25rem;
+    margin-top: auto; /* Empuja el botón hacia abajo */
 }
 
 .add-btn:hover {
@@ -197,6 +205,7 @@ body {
     text-align: center;
     display: flex;
     flex-direction: column;
+    height: 100%; /* Asegura altura completa para flex */
 }
 
 .pizza-icon {
@@ -222,15 +231,20 @@ body {
     font-size: 0.875rem;
     color: #6b7280;
     margin-bottom: 1rem;
+    flex: 1; /* Empuja el price-section abajo */
 }
 
 .pizza-price-section {
     margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Para margin-top: auto */
 }
 
 .price-label {
     font-size: 0.875rem;
     color: #6b7280;
+    margin-bottom: 0; /* Removido para evitar pegado */
 }
 
 .customize-btn {
@@ -242,12 +256,13 @@ body {
     font-weight: bold;
     cursor: pointer;
     width: 100%;
-    margin-top: 0.75rem;
+    margin-top: 0; /* Removido */
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.25rem;
     transition: background-color 0.3s;
+    margin-top: auto; /* Empuja el botón hacia abajo */
 }
 
 .customize-btn:hover {
