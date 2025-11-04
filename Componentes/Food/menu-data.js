@@ -288,10 +288,55 @@ const menuData = {
         }
     },
     espaguetis: [
-        { id: 'esp-1', name: 'Espagueti Sencillo', description: 'De tomate, mantequilla o champiñón.', image: './image/pasta/sencillo.png', price: 109, weight: '300 grs.' },
+        {
+            id: 'esp-1',
+            name: 'Espagueti Sencillo',
+            description: 'Espagueti sencillo con opción de salsa.',
+            details: 'Elige entre mantequilla, tomate o champiñon.',
+            weight: '300g',
+            price: 109,
+            image: './image/pasta/sencillo.png',
+            options: [
+                {
+                    type: 'Tipo de Salsa',
+                    choices: ['Mantequilla', 'Tomate', 'Champiñón'],
+                    required: true
+                }
+            ]
+        },
         { id: 'esp-2', name: 'Espagueti a la Crema', description: 'Sazonado con especias, crema, jamón, morrón, champiñones y queso gratinado.', image:'./image/pasta/crema.png', price: 129, weight: '300g' },
-        { id: 'esp-3', name: 'Espagueti Superlove', description: 'Sazonado con especias, tocino, cebolla, jamón, champiñones, chile morrón, salsa de tomate (opcional) y queso gratinado.', image:'./image/pasta/superlove.png', price: 129, weight: '300g' },
-        { id: 'esp-4', name: 'Espagueti Charola', description: '1.8 kg del espagueti de tu elección.', image:'./image/pasta/charola.png', price: 549 }
+        {
+            id: 'esp-3',
+            name: 'Espagueti Superlove',
+            description: 'Espagueti Superlove con opción opcional de salsa de tomate.',
+            details: 'Incluye carne molida, champiñones y salsa especial.',
+            price: 129,
+            image: './image/pasta/superlove.png',
+            weight: '300g',
+            options: [
+                {
+                    type: 'Agregar Salsa de Tomate',
+                    choices: ['Sí', 'No'],
+                    required: false
+                }
+            ]
+        },
+        {
+            id: 'esp-4',
+            name: 'Espagueti de Charola',
+            description: 'Espagueti de charola, elige uno de los otros tipos.',
+            details: 'Para compartir, con opción de elegir variante.',
+            price: 549,
+            image: './image/pasta/charola.png',
+            weight: '1.2kg',
+            options: [
+                {
+                    type: 'Tipo de Espagueti',
+                    choices: ['Tomate', 'Mantequilla', 'Champiñón', 'A la Crema', 'Superlove'],
+                    required: true
+                }
+            ]
+        },
     ],
     alitas: [
         { id: 'alitas-1', name: 'Alitas Medianas', description: 'BBQ, Picosa o Mango Habanero.', image:'./image/alitasYpapas/medianas.png', price: 179, weight: '480g' },

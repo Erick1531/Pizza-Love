@@ -161,9 +161,6 @@ body {
 }
 
 .promo-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-top: 1rem;
 }
 
@@ -171,17 +168,24 @@ body {
     font-size: 1.5rem;
     font-weight: bold;
     color: #fb0404;
+    display: block;
+    margin-bottom: 0.5rem;
 }
 
 .add-btn {
     background-color: #fcf315;
     color: #000;
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem;
     border-radius: 9999px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
 }
 
 .add-btn:hover {
