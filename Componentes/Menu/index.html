@@ -1,21 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../Nav/nav.css">
-    <script>
-        fetch("../Nav/nav.html")
-        .then(Response => Response.text())
-        .then(data => document.getElementById("navbar").innerHTML = data)
-        .catch(err => console.log(err))
-    </script>
+    <title>Menú - Pizza & Love</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="menu.js"></script>
 </head>
 <body>
-    <header>
-        <nav id="navbar"></nav>
-    </header>
-    <script src="../Menu/menu.js"></script>
+    <div class="menu-container">
+        <h1 class="menu-title">MENÚ</h1>
+        
+        <div class="cards-wrapper">
+            <a href="../Food/index.html#pizzas" class="menu-card">
+                <div class="card-background" style="background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80');"></div>
+                <div class="card-overlay"></div>
+                <div class="card-label">
+                    <h2>PIZZAS</h2>
+                </div>
+            </a>
+
+            <a href="../Food/index.html#bebidas" class="menu-card">
+                <div class="card-background" style="background-image: url('https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=800&q=80');"></div>
+                <div class="card-overlay"></div>
+                <div class="card-label">
+                    <h2>BEBIDAS</h2>
+                </div>
+            </a>
+
+            <a href="../Food/index.html#espaguetis" class="menu-card">
+                <div class="card-background" style="background-image: url('https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&q=80');"></div>
+                <div class="card-overlay"></div>
+                <div class="card-label">
+                    <h2>ESPAGUETI</h2>
+                </div>
+            </a>
+
+            <a href="../Food/index.html#ensaladas" class="menu-card">
+                <div class="card-background" style="background-image: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80');"></div>
+                <div class="card-overlay"></div>
+                <div class="card-label">
+                    <h2>ENSALADAS</h2>
+                </div>
+            </a>
+
+            <a href="../Food/index.html#alitas" class="menu-card">
+                <div class="card-background" style="background-image: url('https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=800&q=80');"></div>
+                <div class="card-overlay"></div>
+                <div class="card-label">
+                    <h2>ALITAS & PAPAS</h2>
+                </div>
+            </a>
+        </div>
+    </div>
 </body>
 </html>

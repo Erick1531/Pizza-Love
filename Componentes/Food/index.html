@@ -1,20 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../Nav/nav.css">
-    <script>
-        fetch("../Nav/nav.html")
-        .then(Response => Response.text())
-        .then(data => document.getElementById("navbar").innerHTML = data)
-        .catch(err => console.log(err))
-    </script>
+    <title>Pizza & Love - Menú</title>
+    <link rel="stylesheet" href="food-menu.css">
 </head>
 <body>
-    <header>
-        <nav id="navbar"></nav>
-    </header>
+    <div class="container">
+        <!-- Header con tabs -->
+        <header class="header">
+            <div class="header-top">
+                <h1>SELECCIONA TU PIZZA</h1>
+                <button class="cart-button" id="cartBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span id="cartCount">0</span>
+                </button>
+            </div>
+            
+            <div class="tabs" id="tabs">
+                <button class="tab active" data-category="promociones">🎉 Promociones</button>
+                <button class="tab" data-category="pizzas">🍕 Pizzas</button>
+                <button class="tab" data-category="espaguetis">🍝 Espaguetis</button>
+                <button class="tab" data-category="alitas">🍗 Alitas y Papas</button>
+                <button class="tab" data-category="ensaladas">🥗 Ensaladas</button>
+                <button class="tab" data-category="complementos">🥖 Complementos</button>
+                <button class="tab" data-category="extras">🌶️ Extras</button>
+                <button class="tab" data-category="bebidas">🥤 Bebidas</button>
+            </div>
+        </header>
+
+        <!-- Contenido principal -->
+        <main class="main-content" id="mainContent">
+            <!-- El contenido se carga dinámicamente -->
+        </main>
+
+        <!-- Modal de personalización de pizza -->
+        <div class="modal" id="pizzaModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="pizzaModalTitle">Pizza</h2>
+                    <button class="close-btn" id="closePizzaModal">&times;</button>
+                </div>
+                <div class="modal-body" id="pizzaModalBody">
+                    <!-- Contenido dinámico -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal del carrito -->
+        <div class="modal" id="cartModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        Mi Carrito (<span id="cartModalCount">0</span>)
+                    </h2>
+                    <button class="close-btn" id="closeCartModal">&times;</button>
+                </div>
+                <div class="modal-body" id="cartModalBody">
+                    <!-- Contenido dinámico -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón flotante del carrito -->
+        <button class="floating-cart" id="floatingCart" style="display: none;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span id="floatingCartCount">0</span>
+            <span class="floating-cart-total" id="floatingCartTotal">$0</span>
+        </button>
+    </div>
+
+    <script src="menu-data.js"></script>
+    <script src="food-menu.js"></script>
 </body>
 </html>

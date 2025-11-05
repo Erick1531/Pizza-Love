@@ -1,15 +1,744 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../Nav/nav.css">
+    <title>Contacto - Pizza & Love</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffeb3b 0%, #ffd54f 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(244, 67, 54, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        nav {
+            background: linear-gradient(to right, #1a1a1a, #2c2c2c);
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: 0;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .social-links svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .facebook::before {
+            background: linear-gradient(135deg, #1877f2, #0d5fc7);
+            box-shadow: 0 4px 15px rgba(24, 119, 242, 0.4);
+        }
+
+        .facebook:hover::before {
+            box-shadow: 0 8px 25px rgba(24, 119, 242, 0.6);
+        }
+
+        .instagram::before {
+            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            box-shadow: 0 4px 15px rgba(225, 48, 108, 0.4);
+        }
+
+        .instagram:hover::before {
+            box-shadow: 0 8px 25px rgba(225, 48, 108, 0.6);
+        }
+
+        .tiktok::before {
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .tiktok:hover::before {
+            box-shadow: 0 8px 25px rgba(255, 0, 80, 0.5);
+        }
+
+        .whatsapp::before {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp:hover::before {
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        .social-links a:hover svg {
+            transform: scale(1.1);
+        }
+
+        .logo {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8e53 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 107, 53, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .logo:hover {
+            transform: rotate(360deg) scale(1.1);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.7);
+        }
+
+        .pizza {
+            width: 45px;
+            height: 45px;
+            background: #ffd54f;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.1);
+        }
+
+        .pizza::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ff6b35;
+            border-radius: 50%;
+            top: 12px;
+            left: 10px;
+            box-shadow: 
+                15px 5px 0 #e53935,
+                5px 18px 0 #e53935,
+                20px 20px 0 #ff6b35;
+        }
+
+        .pizza::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 23px solid transparent;
+            border-right: 23px solid transparent;
+            border-bottom: 40px solid #f4f4f4;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            opacity: 0.3;
+        }
+
+        .menu-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .menu-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 25px;
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+
+        .menu-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #ff6b35;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .menu-links a:hover {
+            color: #ff6b35;
+            background: rgba(255, 107, 53, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .menu-links a:hover::before {
+            width: 70%;
+        }
+
+        .contact-title {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 30px;
+            margin: 60px auto 50px auto;
+            max-width: 450px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            animation: fadeInDown 0.8s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-title h1 {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #e91e63, #f06292);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 62px;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 50px 30px;
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-section {
+            flex: 1;
+            animation: fadeInLeft 1s ease;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .info-item {
+            margin-bottom: 28px;
+            transform: translateX(0);
+            transition: all 0.4s ease;
+        }
+
+        .info-item:hover {
+            transform: translateX(15px);
+        }
+
+        .info-item p {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.6;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 30px;
+            background: white;
+            border-radius: 60px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+
+        .info-item p:hover {
+            box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+            transform: scale(1.05);
+        }
+
+        .info-item p::before {
+            font-size: 26px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .email::before { content: '📧'; }
+        .phone::before { content: '📞'; }
+        .hours::before { content: '🕐'; }
+        .invoice::before { content: '📄'; }
+
+        .email { color: #9c27b0; }
+        .phone { color: #ff6b35; }
+        .hours { color: #9c27b0; }
+        
+        .invoice {
+            color: #9c27b0;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .invoice:hover {
+            color: #7b1fa2;
+        }
+
+        .form-section {
+            flex: 1;
+            background: linear-gradient(135deg, #f44336 0%, #e53935 100%);
+            padding: 45px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(244, 67, 54, 0.4);
+            animation: fadeInRight 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .form-section h2 {
+            color: white;
+            font-size: 26px;
+            margin-bottom: 35px;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 17px 24px;
+            border: none;
+            border-radius: 15px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #999;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.8px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .submit-btn {
+            background: white;
+            color: #f44336;
+            border: none;
+            padding: 17px 45px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 235, 59, 0.5);
+            transition: all 0.5s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .submit-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .submit-btn:hover {
+            background: #ffeb3b;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        .submit-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .submit-btn::after {
+            content: '▶';
+            font-size: 14px;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .submit-btn:hover::after {
+            transform: translateX(8px);
+        }
+
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #4caf50, #66bb6a);
+            color: white;
+            padding: 18px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+            animation: slideDown 0.6s ease;
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 30px 20px;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .form-row .form-group {
+                margin-bottom: 22px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .nav-left {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .menu-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .social-links {
+                order: -1;
+            }
+
+            .contact-title h1 {
+                font-size: 48px;
+            }
+
+            .contact-title {
+                margin: 40px 20px 30px 20px;
+                padding: 30px;
+            }
+
+            .form-section {
+                padding: 35px 25px;
+            }
+
+            .button-container {
+                justify-content: center;
+            }
+
+            .info-item:hover {
+                transform: translateX(8px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <div class="logo">
+                <div class="pizza"></div>
+            </div>
+            <ul class="menu-links">
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#sucursales">Sucursales</a></li>
+                <li><a href="#conocenos">Conócenos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="contact-title">
+        <h1>Contacto</h1>
+    </div>
+
+    <div class="container">
+        <div class="info-section">
+            <div class="info-item">
+                <p class="email">hola@pizzaandlove.com</p>
+            </div>
+            
+            <div class="info-item">
+                <p class="phone">Oficina: 664-104-0251</p>
+            </div>
+            
+            <div class="info-item">
+                <p class="hours">Lun-Vie 10 a.m. a 5 p.m.</p>
+            </div>
+            
+            <div class="info-item">
+                <p class="invoice">Pide factura aquí</p>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="success-message" id="successMessage">
+                ¡Mensaje enviado con éxito! Te contactaremos pronto 🍕
+            </div>
+            
+            <h2>Mándanos un mensaje</h2>
+            <form id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Teléfono" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                
+                <div class="form-group">
+                    <textarea placeholder="Tu mensaje..." required></textarea>
+                </div>
+                
+                <div class="button-container">
+                    <button type="submit" class="submit-btn">
+                        <span>Enviar</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="social-links center" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100;">
+            <a href="https://facebook.com/pizzaandlove" target="_blank" class="facebook" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+            <a href="https://instagram.com/pizzaandloveoficial" target="_blank" class="instagram" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                </svg>
+            </a>
+            <a href="https://tiktok.com/@pizzaandlove.parati" target="_blank" class="tiktok" aria-label="TikTok">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+                </svg>
+            </a>
+            <a href="https://wa.me/526641040251" target="_blank" class="whatsapp" aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+            </a>
+    </div>
+
     <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const successMsg = document.getElementById('successMessage');
+            successMsg.style.display = 'block';
+            
+            this.reset();
+            
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 5000);
+        });
+
+        document.querySelector('.invoice').addEventListener('click', function() {
+            alert('Serás redirigido a la página de facturación');
+        });
+        
         fetch("../Nav/nav.html")
         .then(Response => Response.text())
         .then(data => document.getElementById("navbar").innerHTML = data)
         .catch(err => console.log(err))
+        
     </script>
 </head>
 <body>
