@@ -40,7 +40,7 @@ L.control.scale({
 
 // Icono personalizado
 const iconoPL = L.icon({
-    iconUrl: "../../Img/MarcadorP&L.png",
+    iconUrl: "../../Img/pizzaandlove.png",
     iconSize: [35, 35],
     iconAnchor: [20, 40],
 });
