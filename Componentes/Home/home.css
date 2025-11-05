@@ -1,0 +1,100 @@
+body{
+    background-image: url("../../Img/Fondo.jpg");
+    height: 100vh;
+    margin: 0;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1200px; /* Ajusta según el tamaño de tu imagen */
+    height: 1200px; /* Ajusta según el tamaño de tu imagen */
+    background-image: url("../../Img/919-392w.png");
+    background-size: contain; /* Mantiene proporciones originales */
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    opacity: 0.6;
+}
+
+/* El resto de tu CSS se mantiene igual */
+body > * {
+    position: relative;
+    z-index: 1;
+}
+.logo1{
+    height: 172px;
+    width: 463px;
+}
+.Logo1-Contenedor{
+    height: 40%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+}
+.boton{
+    height: 53px;
+    width: 280.55px;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    transition: all 0.3s ease; /* Agregar transición suave */
+}
+.boton-contenedor{
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.boton a {
+    color: white;             /* texto blanco */
+    text-decoration: none;    /* quita el subrayado */
+    font-size: 18px;          /* opcional, ajusta tamaño */
+    font-weight: bold;        /* opcional, para hacerlo más visible */
+    display: flex;            /* Para que ocupe todo el botón */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease; /* Transición también para el texto */
+}
+
+/* Hover en el botón */
+.boton:hover {
+    background-color: white; /* Fondo blanco completo */
+    border-color: white;     /* Borde blanco para coincidir */
+}
+
+/* Hover en el enlace dentro del botón */
+.boton:hover a {
+    color: rgb(255, 0, 0);   /* Texto rojo cuando el botón tiene hover */
+}
+
+.iconos-contenedor{
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+}
+
+.icono-aplic{
+    height: 80px;
+    width: 80px;
+}
+.texto-contenedor{
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h2{
+    color: white;
+    font-size: 30px;
+}
+

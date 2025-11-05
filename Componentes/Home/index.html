@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../Nav/nav.css">
+    <link rel="stylesheet" href="../Home/home.css">
+    <script>
+        fetch("../Nav/nav.html")
+        .then(Response => Response.text())
+        .then(data=>document.getElementById("navbar").innerHTML=data)
+        .catch(err=>console.log(err))
+    </script>  
+</head>
+<body>
+    <header id="navbar"></header>
+    <div class="Logo1-Contenedor">
+    <img class="logo1" src="../../Img/LOGO RGB slogan blanco.avif" alt="logo">
+    </div>
+    <div class="boton-contenedor">
+        <button class="boton"><a href="../Menu/index.html">ORDENA AHORA</a></button>
+    </div>
+    <div class="iconos-contenedor">
+        <a href="https://www.ubereats.com/feed?diningMode=DELIVERY"><img class="icono-aplic" src="../../Img/uber.avif" alt="Uber"></a>
+        <a href="https://www.didi-food.com/es-419/food/"><img class="icono-aplic" src="../../Img/didi logo.avif" alt="Didi"></a>
+        <a href="https://www.rappi.com.mx/restaurantes"><img class="icono-aplic" src="../../Img/rappi logo.avif" alt="Rappi"></a>
+    </div>
+    <div class="texto-contenedor">
+        <h2>La Mejor Pizza Artesanal a Domicilio - Rappi, DiDi y Uber Eats</h2>
+    </div>
+</body>
+</html>
