@@ -31,6 +31,8 @@
                 <button class="tab" data-category="complementos">🥖 Complementos</button>
                 <button class="tab" data-category="extras">🌶️ Extras</button>
                 <button class="tab" data-category="bebidas">🥤 Bebidas</button>
+                <!-- ✅ NUEVO BOTÓN REGRESAR AL HOME -->
+                <button class="tab home-tab" id="homeBtn">🍕 Regresar al Menu</button>
             </div>
         </header>
 
@@ -86,5 +88,19 @@
 
     <script src="menu-data.js"></script>
     <script src="food-menu.js"></script>
+    
+    <script>
+        // ✅ AGREGAR ESTE SCRIPT PARA EL BOTÓN HOME
+        document.addEventListener('DOMContentLoaded', function() {
+            const homeBtn = document.getElementById('homeBtn');
+            
+            if (homeBtn) {
+                homeBtn.addEventListener('click', function() {
+                    // Cambia esta ruta según donde esté tu archivo home
+                    window.location.href = '../Menu/index.html';
+                });
+            }
+        });
+    </script>
 </body>
 </html>

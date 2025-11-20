@@ -215,3 +215,41 @@ body {
     transform: scale(1.05);
     filter: brightness(0.75) saturate(1.3);
 }
+/* CORRECCIÓN PARA EL NAVBAR - SIN AFECTAR DISEÑO ACTUAL */
+body {
+    display: block; /* Cambia de flex a block */
+    height: auto; /* Cambia de 100vh a auto */
+    min-height: 100vh; /* Mantiene altura mínima */
+    padding: 0; /* Elimina padding que centraba */
+    overflow-x: hidden; /* Previene scroll horizontal */
+}
+
+.menu-container {
+    margin-top: 80px; /* Espacio para el navbar */
+    padding: 20px;
+}
+
+/* Asegura que el navbar no afecte el scroll */
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+}
+
+/* Mantiene la altura del contenedor de cards en desktop */
+.cards-wrapper {
+    height: calc(100vh - 200px); /* Ajusta por el navbar */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .menu-container {
+        margin-top: 70px; /* Menos espacio en móviles */
+    }
+    
+    .cards-wrapper {
+        height: auto; /* Mantiene tu height auto en móviles */
+    }
+}
