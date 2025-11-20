@@ -5,24 +5,24 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #fcf315 25%, #ffd700 60%);
-    height: 100vh;
+    height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 10px;
     overflow: hidden;
 }
 
 .menu-container {
-    max-width: 1800px;
+    max-width: 100%; /* 🔥 CAMBIADO: De 1800px a 100% */
     width: 100%;
+    padding: 0 20px; /* 🔥 AGREGADO: Padding lateral para no pegarse a los bordes */
 }
 
 .menu-title {
     font-size: 3.5rem;
-    font-weight: 900;
+    font-weight: 500;
     color: #fb0404;
     text-align: center;
     margin-bottom: 25px;
@@ -35,7 +35,6 @@ body {
     0%, 100% {
         transform: scale(1);
     }
-
     50% {
         transform: scale(1.02);
     }
@@ -44,8 +43,8 @@ body {
 .cards-wrapper {
     display: flex;
     gap: 0;
-    height: calc(100vh - 180px);
-    max-height: 750px;
+    height: calc(90vh - 180px);
+    max-height: 650px;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -166,39 +165,6 @@ body {
     pointer-events: none;
 }
 
-@media (max-width: 768px) {
-    .menu-title {
-        font-size: 2rem;
-        margin-bottom: 20px;
-    }
-
-    .cards-wrapper {
-        flex-direction: column;
-        height: auto;
-        gap: 15px;
-    }
-
-    .menu-card {
-        height: 120px;
-    }
-
-    .menu-card:hover {
-        flex: 1;
-    }
-
-    .card-label {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    .card-label h2 {
-        font-size: 1.5rem;
-    }
-
-    .menu-card:hover .card-label h2 {
-        font-size: 1.7rem;
-    }
-}
-
 .card-background {
     position: absolute;
     top: -10%;
@@ -215,21 +181,21 @@ body {
     transform: scale(1.05);
     filter: brightness(0.75) saturate(1.3);
 }
-/* CORRECCIÓN PARA EL NAVBAR - SIN AFECTAR DISEÑO ACTUAL */
+
+/* 🔥 CORRECCIÓN PARA EL NAVBAR */
 body {
-    display: block; /* Cambia de flex a block */
-    height: auto; /* Cambia de 100vh a auto */
-    min-height: 100vh; /* Mantiene altura mínima */
-    padding: 0; /* Elimina padding que centraba */
-    overflow-x: hidden; /* Previene scroll horizontal */
+    display: block;
+    height: auto;
+    min-height: 100vh;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 .menu-container {
-    margin-top: 80px; /* Espacio para el navbar */
+    margin-top: 80px;
     padding: 20px;
 }
 
-/* Asegura que el navbar no afecte el scroll */
 #navbar {
     position: fixed;
     top: 0;
@@ -238,18 +204,274 @@ body {
     z-index: 10000;
 }
 
-/* Mantiene la altura del contenedor de cards en desktop */
 .cards-wrapper {
-    height: calc(100vh - 200px); /* Ajusta por el navbar */
+    height: calc(100vh - 200px);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* 🔥 RESPONSIVE DESIGN - MANTENIENDO EXACTAMENTE EL MISMO ESTILO */
+
+/* Desktop grande - ajustes menores */
+@media (max-width: 1440px) {
     .menu-container {
-        margin-top: 70px; /* Menos espacio en móviles */
+        max-width: 100%; /* 🔥 MANTENIDO: 100% en todos los breakpoints */
+        padding: 0 30px;
     }
     
     .cards-wrapper {
-        height: auto; /* Mantiene tu height auto en móviles */
+        height: calc(95vh - 200px);
+        max-height: 600px;
+    }
+}
+
+/* Tablets grandes - layout horizontal mantenido */
+@media (max-width: 1200px) {
+    .menu-title {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+    
+    .cards-wrapper {
+        height: calc(90vh - 180px);
+        max-height: 550px;
+    }
+    
+    .card-label h2 {
+        font-size: 2rem;
+    }
+    
+    .menu-card:hover .card-label h2 {
+        font-size: 2.4rem;
+    }
+}
+
+/* Tablets - layout horizontal mantenido */
+@media (max-width: 992px) {
+    .menu-container {
+        padding: 0 25px;
+    }
+    
+    .menu-title {
+        font-size: 2.6rem;
+        letter-spacing: 4px;
+    }
+    
+    .cards-wrapper {
+        height: calc(85vh - 160px);
+        max-height: 500px;
+    }
+    
+    .card-label h2 {
+        font-size: 1.7rem;
+    }
+    
+    .menu-card:hover .card-label h2 {
+        font-size: 2rem;
+    }
+    
+    .menu-card:hover {
+        flex: 3;
+    }
+}
+
+/* Tablets pequeñas - layout horizontal mantenido */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+        padding: 0;
+        overflow-y: auto;
+    }
+    
+    .menu-container {
+        margin-top: 70px;
+        padding: 0 20px;
+    }
+    
+    .menu-title {
+        font-size: 2.3rem;
+        margin-bottom: 25px;
+        letter-spacing: 3px;
+    }
+    
+    .cards-wrapper {
+        height: 400px;
+        max-height: 400px;
+        flex-direction: row; /* Mantiene layout horizontal */
+        gap: 0;
+    }
+    
+    .menu-card {
+        height: 100%;
+    }
+    
+    .card-label h2 {
+        font-size: 1.4rem;
+        letter-spacing: 2px;
+    }
+    
+    .menu-card:hover .card-label h2 {
+        font-size: 1.7rem;
+    }
+    
+    .menu-card:hover {
+        flex: 2.5;
+    }
+}
+
+/* Móviles grandes - cambia a vertical SOLO cuando sea necesario */
+@media (max-width: 650px) {
+    .menu-container {
+        padding: 0 15px;
+    }
+    
+    .cards-wrapper {
+        flex-direction: column;
+        height: auto;
+        max-height: none;
+        gap: 15px;
+    }
+    
+    .menu-card {
+        height: 120px;
+        flex: none;
+    }
+    
+    .card-label {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    
+    .card-label h2 {
+        font-size: 1.6rem;
+    }
+    
+    .menu-card:hover {
+        flex: none;
+        height: 140px;
+    }
+    
+    .menu-card:hover .card-label h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Móviles estándar */
+@media (max-width: 480px) {
+    .menu-container {
+        padding: 0 10px;
+    }
+    
+    .menu-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .cards-wrapper {
+        gap: 12px;
+    }
+    
+    .menu-card {
+        height: 100px;
+    }
+    
+    .card-label h2 {
+        font-size: 1.4rem;
+    }
+    
+    .menu-card:hover {
+        height: 120px;
+    }
+    
+    .menu-card:hover .card-label h2 {
+        font-size: 1.6rem;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 360px) {
+    .menu-container {
+        padding: 0 8px;
+    }
+    
+    .menu-title {
+        font-size: 1.8rem;
+    }
+    
+    .menu-card {
+        height: 90px;
+    }
+    
+    .card-label h2 {
+        font-size: 1.3rem;
+    }
+    
+    .menu-card:hover {
+        height: 110px;
+    }
+    
+    .menu-card:hover .card-label h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* 🔥 MEJORAS PARA TÁCTIL Y EXPERIENCIA MÓVIL */
+@media (hover: none) and (pointer: coarse) {
+    .menu-card {
+        transition: all 0.4s ease;
+    }
+    
+    .menu-card:active {
+        flex: 3.5 !important;
+        transform: scale(0.98);
+    }
+    
+    .menu-card:active .card-label {
+        transform: translate(-50%, -50%) rotate(0deg) scale(1.1);
+    }
+    
+    .menu-card:active .card-background {
+        transform: scale(1.1);
+    }
+}
+
+/* 🔥 ASEGURAR QUE EL CONTENIDO SEA VISIBLE EN TODOS LOS DISPOSITIVOS */
+@media (max-height: 700px) and (orientation: landscape) {
+    .cards-wrapper {
+        height: calc(100vh - 150px);
+        max-height: 400px;
+    }
+    
+    .menu-container {
+        margin-top: 60px;
+    }
+}
+
+/* 🔥 MANTENER LA PROPORCIÓN DE LAS IMÁGENES */
+.card-background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* 🔥 OPTIMIZAR PARA PANTALLAS MUY GRANDES - SIN LIMITE DE ANCHO */
+@media (min-width: 2000px) {
+    .menu-container {
+        max-width: 100%; /* 🔥 MANTENIDO: 100% incluso en pantallas grandes */
+        padding: 0 40px;
+    }
+    
+    .menu-title {
+        font-size: 4rem;
+    }
+    
+    .cards-wrapper {
+        max-height: 800px;
+    }
+    
+    .card-label h2 {
+        font-size: 2.5rem;
+    }
+    
+    .menu-card:hover .card-label h2 {
+        font-size: 3.2rem;
     }
 }
