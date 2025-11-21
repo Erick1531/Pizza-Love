@@ -1,0 +1,130 @@
+{
+  "sucursales": [
+    {
+      "nombre": "5y10",
+      "lat": 32.498548715618846,
+      "lng": -116.96639865953074,
+      "direccion": "Blvd. Gustavo Diaz Ordaz 14503, Plaza 5 y 10, La Esmeralda, Tijuana, B.C.",
+      "tel": "+52 664 104 1080",
+      "horario": "11:00 - 20:00",
+      "abierto": true
+    },
+    {
+      "nombre": "Casa Blanca",
+      "lat": 32.50159887220272,
+      "lng": -116.89754779074997,
+      "direccion": "Blvd. Casa Blanca S/N, Las Misiones, 22215 Tijuana, B.C.",
+      "tel": "+52 664 645 6040",
+      "horario": "10:00 - 22:00",
+      "abierto": true
+    },
+    {
+      "nombre": "Revolución",
+      "lat": 32.52984863854589,
+      "lng": -117.03599228704998,
+      "direccion": "Av. Revolución 1385, Zona Centro, 22000 Tijuana, B.C.",
+      "tel": "+52 664 104 1080",
+      "horario": "11:00 - 22:00",
+      "abierto": true
+    },
+    {
+      "nombre": "Las Américas",
+      "lat": 32.50387096456004,
+      "lng": -116.98955285821424,
+      "direccion": "Blvd. de Las Américas 5216, Lomas de Agua Caliente, 22024 Tijuana, B.C.",
+      "tel": "+52 664 104 1080",
+      "horario": "11:00 - 22:00",
+      "abierto": true
+    },
+    {
+      "nombre": "Guaycura",
+      "lat": 32.50622096783539,
+      "lng": -116.91733985636424,
+      "direccion": "Blvd. Cucapah 20791, Amp. Guaycura, 22214 Tijuana, B.C.",
+      "tel": "+52 664 104 1080",
+      "horario": "10:00 - 22:00",
+      "abierto": true
+    },
+    {
+      "nombre": "Playas",
+      "lat": 32.527258409247196,
+      "lng": -117.11746275342861,
+      "direccion": "Plaza Jardines, Miramar, Paseo Ensenada, Jardines Playas de Tijuana, 22500 Tijuana, B.C.",
+      "tel": "+52 664 104 1080",
+      "horario": "10:00 - 22:00",
+      "abierto": true
+    },
+    {
+      "nombre": "Paseo del Río",
+      "lat": 32.47813331799085,
+      "lng": -116.92613187540711,
+      "direccion": "Paseo del Río 2808, Río Tijuana 3a. Etapa, Tijuana, Baja California",
+      "tel": "+52 664 104 1080",
+      "horario": "10:00 - 22:00",
+      "abierto": true
+    },
+    {
+      "nombre": "Hipódromo",
+      "lat": 32.499, 
+      "lng": -116.967,
+      "direccion": "Av. De Las Ferias 68, Lomas Hipódromo, 22030 Tijuana, B.C.",
+      "tel": "+52 664 104 1080",
+      "horario": "10:00 - 22:00",
+      "abierto": true
+    },
+    {
+      "nombre": "Siglo XXI",
+      "lat": 32.48600260031889,
+      "lng": -116.9426866447214,
+      "direccion": "Blvd. Díaz Ordaz 3120, La Joya Este, CP 22125, Plaza Calimax Fiesta, Tijuana, B.C.",
+      "tel": "+52 664 104 1080",
+      "horario": "12:00 - 23:00",
+      "abierto": true
+    },
+    {
+      "nombre": "Rosarito Norte",
+      "lat": 32.40271898466592,
+      "lng": -117.04871134771275,
+      "direccion": "Rosarito Norte, Baja California",
+      "tel": "+52 664 104 1080",
+      "horario": "10:00 - 22:00",
+      "abierto": false
+    },
+    {
+      "nombre": "Rosarito Centro",
+      "lat": 32.36564452105704,
+      "lng": -117.05404487540713,
+      "direccion": "Rosarito Centro, Baja California",
+      "tel": "+52 664 104 1080",
+      "horario": "10:00 - 22:00",
+      "abierto": false
+    },
+    {
+      "nombre": "Libertad",
+      "lat": 32.530939866116476,
+      "lng": -117.0070310575167,
+      "direccion": "Libertad, Tijuana, B.C.",
+      "tel": "+52 664 104 1080",
+      "horario": "10:00 - 22:00",
+      "abierto": false
+    },
+    {
+      "nombre": "Altabrisa",
+      "lat": 32.53058160188567,
+      "lng": -116.97340260609286,
+      "direccion": "Altabrisa, Tijuana, B.C.",
+      "tel": "+52 664 104 1080",
+      "horario": "10:00 - 22:00",
+      "abierto": false
+    },
+    {
+      "nombre": "Industrial",
+      "lat": 32.536608608766905,
+      "lng": -116.92913298889998,
+      "direccion": "Industrial, Tijuana, B.C.",
+      "tel": "+52 664 104 1080",
+      "horario": "10:00 - 22:00",
+      "abierto": false
+    }
+  ]
+}

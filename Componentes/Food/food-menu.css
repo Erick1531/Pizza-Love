@@ -742,3 +742,130 @@ body {
     border-color: #fb0404;
     background-color: #fef2f2;
 }
+
+/* Modal de sucursales */
+.loading-branch {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.loading-branch p {
+    color: #666;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #e74c3c;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.branch-selection {
+    padding: 1rem;
+}
+
+.branch-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.branch-header h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.branch-distance {
+    color: #e74c3c;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.branch-card-selected {
+    background: #fff7f6;
+    border: 2px solid #e74c3c;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.branch-card-selected h4 {
+    color: #e74c3c;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.branch-info p {
+    margin: 0.5rem 0;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.branch-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.confirm-branch-btn, .change-branch-btn, .view-map-btn {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.confirm-branch-btn {
+    background: #e74c3c;
+    color: white;
+}
+
+.confirm-branch-btn:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.change-branch-btn, .view-map-btn {
+    background: white;
+    color: #e74c3c;
+    border: 2px solid #e74c3c;
+}
+
+.change-branch-btn:hover, .view-map-btn:hover {
+    background: #fff7f6;
+}
+
+.branch-error {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.branch-error svg {
+    margin-bottom: 1rem;
+}
+
+.branch-error h3 {
+    color: #e74c3c;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.branch-error p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
