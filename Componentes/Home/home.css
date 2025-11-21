@@ -333,7 +333,7 @@ h2{
 @media (max-width: 768px) {
     body {
         padding-top: 80px;
-        height: calc(100vh - 80px);
+        height: 100vh;
         overflow: hidden;
     }
     
@@ -391,7 +391,7 @@ h2{
 @media (max-width: 480px) {
     body {
         padding-top: 70px;
-        height: calc(100vh - 70px);
+        height: 100vh;
         overflow: hidden;
     }
     
@@ -455,7 +455,8 @@ h2{
 @media (max-width: 360px) {
     body {
         padding-top: 65px;
-        height: calc(100vh - 65px);
+        height: 100vh;
+        overflow: hidden;
     }
     
     .Logo1-Contenedor {

@@ -315,9 +315,38 @@ margin-left: 0px;
     fill: #1877f2;
 }
 
+/* 🔥 NUEVO: Estilos para el icono de TikTok */
+.tiktok-icon {
+    display: none;
+    cursor: pointer;
+}
+
+.tiktok-icon svg {
+    width: 30px;
+    height: 30px;
+    transition: all 0.3s ease;
+}
+
+.tiktok-icon a:hover svg {
+    filter: drop-shadow(0 0 8px #ff0050);
+}
+
 @media (max-width: 768px) {
     .facebook-icon {
         display: none;
+    }
+    
+    /* 🔥 CAMBIO: Mostrar TikTok en móvil en lugar del carrito */
+    .cart-icon {
+        display: none;
+    }
+    
+    .tiktok-icon {
+        display: block;
+        position: absolute;
+        right: 20px; /* 🔥 Cambiado de 70px a 20px para más a la derecha */
+        top: 50%;
+        transform: translateY(-50%);
     }
 }
 
