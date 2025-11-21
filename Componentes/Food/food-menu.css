@@ -869,3 +869,123 @@ body {
     margin-bottom: 1.5rem;
     line-height: 1.6;
 }
+
+/* Lista de sucursales */
+.branch-list-container {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.branch-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.branch-list-header h3 {
+    font-size: 1.5rem;
+    color: #1f2937;
+    margin: 0;
+}
+
+.detect-nearest-btn {
+    background: linear-gradient(135deg, #fb0404 0%, #d00303 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(251, 4, 4, 0.2);
+}
+
+.detect-nearest-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(251, 4, 4, 0.3);
+}
+
+.detect-nearest-btn:active {
+    transform: translateY(0);
+}
+
+.branches-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.branch-list-item {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.branch-list-item:hover {
+    border-color: #fb0404;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.branch-list-item h4 {
+    color: #1f2937;
+    font-size: 1.125rem;
+    margin: 0;
+    font-weight: 600;
+    flex: 1;
+}
+
+.select-branch-btn {
+    background: linear-gradient(135deg, #fb0404 0%, #d00303 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(251, 4, 4, 0.2);
+}
+
+.select-branch-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(251, 4, 4, 0.3);
+}
+
+.select-branch-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive para lista de sucursales */
+@media (max-width: 640px) {
+    .branch-list-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+    
+    .detect-nearest-btn {
+        width: 100%;
+    }
+    
+    .branch-list-item {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .select-branch-btn {
+        width: 100%;
+    }
+}

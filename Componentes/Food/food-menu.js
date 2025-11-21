@@ -8,6 +8,58 @@ let selectedBranch = null;
 // Elementos del DOM
 let mainContent, cartBtn, cartCount, pizzaModal, cartModal, closePizzaModal, closeCartModal, floatingCart, branchModal, closeBranchModal;
 
+// ========================================
+// FUNCIONES DE PERSISTENCIA DEL CARRITO
+// ========================================
+
+// Cargar carrito desde sessionStorage
+function loadCart() {
+    try {
+        const savedCart = sessionStorage.getItem('pizzaAndLoveCart');
+        if (savedCart) {
+            cart = JSON.parse(savedCart);
+            console.log('Carrito cargado desde sessionStorage:', cart);
+        }
+    } catch (error) {
+        console.error('Error al cargar el carrito:', error);
+        cart = [];
+    }
+}
+
+// Guardar carrito en sessionStorage
+function saveCart() {
+    try {
+        sessionStorage.setItem('pizzaAndLoveCart', JSON.stringify(cart));
+        console.log('Carrito guardado en sessionStorage:', cart);
+    } catch (error) {
+        console.error('Error al guardar el carrito:', error);
+    }
+}
+
+// Cargar sucursal seleccionada desde sessionStorage
+function loadSelectedBranch() {
+    try {
+        const savedBranch = sessionStorage.getItem('selectedBranch');
+        if (savedBranch) {
+            selectedBranch = JSON.parse(savedBranch);
+            console.log('Sucursal cargada:', selectedBranch);
+        }
+    } catch (error) {
+        console.error('Error al cargar la sucursal:', error);
+    }
+}
+
+// Guardar sucursal seleccionada en sessionStorage
+function saveSelectedBranch(branch) {
+    try {
+        selectedBranch = branch;
+        sessionStorage.setItem('selectedBranch', JSON.stringify(branch));
+        console.log('Sucursal guardada:', branch);
+    } catch (error) {
+        console.error('Error al guardar la sucursal:', error);
+    }
+}
+
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
     mainContent = document.getElementById('mainContent');
@@ -20,6 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
     closeCartModal = document.getElementById('closeCartModal');
     closeBranchModal = document.getElementById('closeBranchModal');
     floatingCart = document.getElementById('floatingCart');
+
+    // CARGAR DATOS GUARDADOS
+    loadCart();
+    loadSelectedBranch();
+    updateCartUI(); // Actualizar la UI con el carrito cargado
 
     setupTabs();
     
@@ -540,6 +597,7 @@ function addConfiguredProductToCart() {
     };
     
     cart.push(item);
+    saveCart(); // GUARDAR EN SESSIONSTORAGE
     updateCartUI();
     hidePizzaModal();
 }
@@ -555,6 +613,7 @@ function addToCart(product) {
     };
     
     cart.push(item);
+    saveCart(); // GUARDAR EN SESSIONSTORAGE
     updateCartUI();
 }
 
@@ -625,7 +684,7 @@ function renderCart() {
                 <span class="cart-total-label">Total:</span>
                 <span class="cart-total-price">$${getCartTotal()}</span>
             </div>
-            <button class="checkout-btn" id="checkoutBtn">Continuar al Pago</button>
+            <button class="checkout-btn" id="checkoutBtn">Seleccionar sucursal</button>
             <button class="continue-shopping-btn" id="continueShopping">Seguir Comprando</button>
         </div>
     `;
@@ -665,7 +724,7 @@ function proceedToCheckout() {
     // Obtener sucursal más cercana directamente
     getNearestBranchLocal()
         .then(branch => {
-            selectedBranch = branch;
+            saveSelectedBranch(branch); // GUARDAR SUCURSAL EN SESSIONSTORAGE
             renderBranchSelection(branch);
         })
         .catch(error => {
@@ -819,25 +878,28 @@ function renderBranchError(error) {
 // Confirmar sucursal y proceder
 function confirmBranch(branch) {
     // Aquí puedes procesar el pedido con la sucursal seleccionada
-    alert(`Pedido confirmado para la sucursal: ${branch.nombre}\n\nTotal: $${getCartTotal()}\n\n¡Gracias por tu compra!`);
+    alert(`Pedido confirmado para la sucursal: ${branch.nombre}\n\nTotal: ${getCartTotal()}\n\n¡Gracias por tu compra!`);
     
-    // Limpiar carrito
+    // Limpiar carrito y sucursal
     cart = [];
+    selectedBranch = null;
+    saveCart(); // GUARDAR CARRITO VACÍO
+    sessionStorage.removeItem('selectedBranch'); // LIMPIAR SUCURSAL
     updateCartUI();
     hideBranchModal();
 }
 
 // Ir a la página del mapa
 function goToMapPage() {
-    // Guardar el carrito antes de ir al mapa
-    localStorage.setItem('tempCart', JSON.stringify(cart));
-    // Redirigir a la página del mapa con parámetro para selección
+    // Ya no necesitamos localStorage temporal, sessionStorage persiste entre páginas
+    // El carrito ya está guardado en sessionStorage
     window.location.href = '../Sucursales/index.html?select=true';
 }
 
 // Eliminar del carrito
 function removeFromCart(itemId) {
     cart = cart.filter(item => item.id !== itemId);
+    saveCart(); // GUARDAR EN SESSIONSTORAGE
     updateCartUI();
     renderCart();
 }
@@ -855,5 +917,109 @@ function hideCartModal() {
 
 function hideBranchModal() {
     branchModal.classList.remove('show');
-    selectedBranch = null;
+    // No limpiar selectedBranch aquí, solo al confirmar o cancelar
+}
+
+// Proceder al pago - Mostrar lista de sucursales
+function proceedToCheckout() {
+    hideCartModal();
+    
+    const modalBody = document.getElementById('branchModalBody');
+    modalBody.innerHTML = `
+        <div class="loading-branch">
+            <div class="spinner"></div>
+            <p>Cargando sucursales...</p>
+        </div>
+    `;
+    
+    branchModal.classList.add('show');
+    
+    // Cargar y mostrar lista de sucursales
+    loadBranchesList()
+        .then(branches => {
+            renderBranchesList(branches);
+        })
+        .catch(error => {
+            console.error('Error al cargar sucursales:', error);
+            renderBranchError(error);
+        });
+}
+
+// Cargar lista de sucursales desde JSON
+async function loadBranchesList() {
+    try {
+        const response = await fetch('../Sucursales/sucursales.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data.sucursales.filter(s => s.abierto);
+    } catch (error) {
+        throw new Error('Error al cargar sucursales');
+    }
+}
+
+// Renderizar lista de sucursales
+function renderBranchesList(branches) {
+    const modalBody = document.getElementById('branchModalBody');
+    
+    let html = `
+        <div class="branch-list-container">
+            <div class="branch-list-header">
+                <h3>Selecciona tu sucursal</h3>
+                <button class="detect-nearest-btn" id="detectNearestBtn">
+                    📍 Detectar más cercana
+                </button>
+            </div>
+            
+            <div class="branches-list">
+    `;
+    
+    branches.forEach(branch => {
+        html += `
+            <div class="branch-list-item" data-branch='${JSON.stringify(branch)}'>
+                <h4>${branch.nombre}</h4>
+                <button class="select-branch-btn">Seleccionar</button>
+            </div>
+        `;
+    });
+    
+    html += `
+            </div>
+        </div>
+    `;
+    
+    modalBody.innerHTML = html;
+    
+    // Event listeners para seleccionar sucursal
+    modalBody.querySelectorAll('.select-branch-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const branchItem = this.closest('.branch-list-item');
+            const branchData = JSON.parse(branchItem.getAttribute('data-branch'));
+            saveSelectedBranch(branchData);
+            renderBranchSelection(branchData);
+        });
+    });
+    
+    // Event listener para detectar sucursal más cercana
+    document.getElementById('detectNearestBtn').addEventListener('click', () => {
+        const modalBody = document.getElementById('branchModalBody');
+        modalBody.innerHTML = `
+            <div class="loading-branch">
+                <div class="spinner"></div>
+                <p>Detectando sucursal más cercana...</p>
+            </div>
+        `;
+        
+        getNearestBranchLocal()
+            .then(branch => {
+                saveSelectedBranch(branch);
+                renderBranchSelection(branch);
+            })
+            .catch(error => {
+                console.error('Error al obtener sucursal:', error);
+                renderBranchError(error);
+            });
+    });
 }

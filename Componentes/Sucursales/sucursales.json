@@ -88,7 +88,7 @@
       "direccion": "Rosarito Norte, Baja California",
       "tel": "+52 664 104 1080",
       "horario": "10:00 - 22:00",
-      "abierto": false
+      "abierto": true
     },
     {
       "nombre": "Rosarito Centro",
@@ -97,7 +97,7 @@
       "direccion": "Rosarito Centro, Baja California",
       "tel": "+52 664 104 1080",
       "horario": "10:00 - 22:00",
-      "abierto": false
+      "abierto": true
     },
     {
       "nombre": "Libertad",
@@ -106,7 +106,7 @@
       "direccion": "Libertad, Tijuana, B.C.",
       "tel": "+52 664 104 1080",
       "horario": "10:00 - 22:00",
-      "abierto": false
+      "abierto": true
     },
     {
       "nombre": "Altabrisa",
@@ -115,8 +115,7 @@
       "direccion": "Altabrisa, Tijuana, B.C.",
       "tel": "+52 664 104 1080",
       "horario": "10:00 - 22:00",
-      "abierto": false
-    },
+      "abierto": true    },
     {
       "nombre": "Industrial",
       "lat": 32.536608608766905,
@@ -124,7 +123,7 @@
       "direccion": "Industrial, Tijuana, B.C.",
       "tel": "+52 664 104 1080",
       "horario": "10:00 - 22:00",
-      "abierto": false
+      "abierto": true
     }
   ]
 }

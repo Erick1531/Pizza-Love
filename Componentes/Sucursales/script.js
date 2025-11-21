@@ -230,8 +230,8 @@ const showError = (error) => {
 window.selectBranch = function(branchName) {
     const branch = sucursales.find(s => s.nombre === branchName);
     if (branch && branch.abierto) {
-        // Guardar sucursal seleccionada en localStorage
-        localStorage.setItem('selectedBranch', JSON.stringify(branch));
+        // Guardar sucursal seleccionada en sessionStorage
+        sessionStorage.setItem('selectedBranch', JSON.stringify(branch));
         
         // Mostrar confirmación
         if (confirm(`¿Confirmar sucursal ${branch.nombre}?\n\n${branch.direccion}`)) {

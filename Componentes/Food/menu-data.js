@@ -46,12 +46,12 @@ const menuData = {
             options: [
                 {
                     type: 'Especialidad Pizza 1',
-                    choices: ['María', 'Carnosa', 'Superlove', 'Waikiki', 'SuperPepe', 'Franchesca', 'Siciliana', 'La Flaca', 'Mi Pizza'],
+                    choices: ['María', 'Carnosa', 'Superlove', 'Waikiki', 'SuperPepe', 'Franchesca', 'Siciliana', 'La Flaca'],
                     required: true
                 },
                 {
                     type: 'Especialidad Pizza 2',
-                    choices: ['María', 'Carnosa', 'Superlove', 'Waikiki', 'SuperPepe', 'Franchesca', 'Siciliana', 'La Flaca', 'Mi Pizza'],
+                    choices: ['María', 'Carnosa', 'Superlove', 'Waikiki', 'SuperPepe', 'Franchesca', 'Siciliana', 'La Flaca'],
                     required: true
                 }
             ]
@@ -65,12 +65,12 @@ const menuData = {
             options: [
                 {
                     type: 'Especialidad Pizza 1',
-                    choices: ['María', 'Carnosa', 'Superlove', 'Waikiki', 'SuperPepe', 'Franchesca', 'Siciliana', 'La Flaca', 'Mi Pizza'],
+                    choices: ['María', 'Carnosa', 'Superlove', 'Waikiki', 'SuperPepe', 'Franchesca', 'Siciliana', 'La Flaca'],
                     required: true
                 },
                 {
                     type: 'Especialidad Pizza 2',
-                    choices: ['María', 'Carnosa', 'Superlove', 'Waikiki', 'SuperPepe', 'Franchesca', 'Siciliana', 'La Flaca', 'Mi Pizza'],
+                    choices: ['María', 'Carnosa', 'Superlove', 'Waikiki', 'SuperPepe', 'Franchesca', 'Siciliana', 'La Flaca'],
                     required: true
                 }
             ]
@@ -84,12 +84,12 @@ const menuData = {
             options: [
                 {
                     type: 'Especialidad Pizza 1',
-                    choices: ['María', 'Carnosa', 'Superlove', 'Waikiki', 'SuperPepe', 'Franchesca', 'Siciliana', 'La Flaca', 'Mi Pizza'],
+                    choices: ['María', 'Carnosa', 'Superlove', 'Waikiki', 'SuperPepe', 'Franchesca', 'Siciliana', 'La Flaca'],
                     required: true
                 },
                 {
                     type: 'Especialidad Pizza 2',
-                    choices: ['María', 'Carnosa', 'Superlove', 'Waikiki', 'SuperPepe', 'Franchesca', 'Siciliana', 'La Flaca', 'Mi Pizza'],
+                    choices: ['María', 'Carnosa', 'Superlove', 'Waikiki', 'SuperPepe', 'Franchesca', 'Siciliana', 'La Flaca'],
                     required: true
                 }
             ]

@@ -219,3 +219,59 @@ body {
         min-height: 320px;
     }
 }
+
+/* Botón de seleccionar sucursal */
+.select-branch-btn {
+    background: linear-gradient(135deg, #fb0404 0%, #d00303 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(251, 4, 4, 0.2);
+}
+
+.select-branch-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(251, 4, 4, 0.3);
+    background: linear-gradient(135deg, #d00303 0%, #b00202 100%);
+}
+
+.select-branch-btn:active {
+    transform: translateY(0);
+}
+
+/* Badge de estado */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+.status-open {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-closed {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Tarjetas de ubicación cerradas */
+.location-card.closed {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.location-card.closed .select-branch-btn {
+    display: none;
+}
