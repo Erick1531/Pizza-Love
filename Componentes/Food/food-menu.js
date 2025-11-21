@@ -3,9 +3,10 @@ let cart = [];
 let currentCategory = 'promociones';
 let currentProduct = null;
 let productConfig = {};
+let selectedBranch = null;
 
 // Elementos del DOM
-let mainContent, cartBtn, cartCount, pizzaModal, cartModal, closePizzaModal, closeCartModal, floatingCart;
+let mainContent, cartBtn, cartCount, pizzaModal, cartModal, closePizzaModal, closeCartModal, floatingCart, branchModal, closeBranchModal;
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,26 +15,25 @@ document.addEventListener('DOMContentLoaded', () => {
     cartCount = document.getElementById('cartCount');
     pizzaModal = document.getElementById('pizzaModal');
     cartModal = document.getElementById('cartModal');
+    branchModal = document.getElementById('branchModal');
     closePizzaModal = document.getElementById('closePizzaModal');
     closeCartModal = document.getElementById('closeCartModal');
+    closeBranchModal = document.getElementById('closeBranchModal');
     floatingCart = document.getElementById('floatingCart');
 
     setupTabs();
     
-    // Leer el hash de la URL y activar la tab correspondiente si existe
-    const hash = window.location.hash.substring(1); // Obtiene el hash sin el '#', ej. "pizzas"
+    // Leer el hash de la URL
+    const hash = window.location.hash.substring(1);
     if (hash) {
         const tabButton = document.querySelector(`.tab[data-category="${hash}"]`);
         if (tabButton) {
-            // Cambia la categoría actual y simula un clic para activar la tab
             currentCategory = hash;
-            tabButton.click(); // Esto activa la tab y renderiza el contenido
+            tabButton.click();
         } else {
-            // Si el hash no coincide, renderiza la categoría por defecto
             renderCategory('promociones');
         }
     } else {
-        // Si no hay hash, renderiza la categoría por defecto
         renderCategory('promociones');
     }
     
@@ -59,12 +59,16 @@ function setupModalListeners() {
     floatingCart.addEventListener('click', () => showCartModal());
     closePizzaModal.addEventListener('click', () => hidePizzaModal());
     closeCartModal.addEventListener('click', () => hideCartModal());
+    closeBranchModal.addEventListener('click', () => hideBranchModal());
 
     pizzaModal.addEventListener('click', (e) => {
         if (e.target === pizzaModal) hidePizzaModal();
     });
     cartModal.addEventListener('click', (e) => {
         if (e.target === cartModal) hideCartModal();
+    });
+    branchModal.addEventListener('click', (e) => {
+        if (e.target === branchModal) hideBranchModal();
     });
 }
 
@@ -81,7 +85,7 @@ function renderCategory(category) {
     }
 }
 
-// Renderizar items genéricos (promociones, espaguetis, alitas, etc.)
+// Renderizar items genéricos
 function renderItems(items, type) {
     const grid = document.createElement('div');
     grid.className = 'items-grid';
@@ -157,9 +161,7 @@ function renderPizzas() {
             <p class="description">${pizza.description}</p>
             <div class="promo-footer">
                 <span class="price">$${pizza.sizes[0].price}</span>
-                <button class="add-btn">
-                    Personalizar
-                </button>
+                <button class="add-btn">Personalizar</button>
             </div>
         `;
         
@@ -200,7 +202,7 @@ function renderPizzaCustomizer() {
         html += `<p class="pizza-description" style="font-size: 0.875rem; color: #6b7280;">${product.details}</p>`;
     }
     
-    // Tamaños (para pizzas)
+    // Tamaños
     if (product.sizes) {
         html += `
             <div class="section">
@@ -218,7 +220,7 @@ function renderPizzaCustomizer() {
         `;
     }
     
-    // Ingredientes (para pizzas personalizables)
+    // Ingredientes
     if (product.ingredients) {
         html += `
             <div class="section" id="ingredientsSection" style="${product.sizes ? 'display: none;' : ''}">
@@ -232,7 +234,7 @@ function renderPizzaCustomizer() {
         `;
     }
     
-    // Extras (para pizzas)
+    // Extras
     if (product.extras) {
         html += `
             <div class="section" id="extrasSection" style="display: none;">
@@ -242,7 +244,7 @@ function renderPizzaCustomizer() {
         `;
     }
     
-    // Opciones genéricas (para promociones, espaguetis, etc.)
+    // Opciones genéricas
     if (product.options && product.options.length > 0) {
         product.options.forEach((option, idx) => {
             html += `
@@ -301,7 +303,6 @@ function renderPizzaCustomizer() {
 function setupPizzaListeners() {
     const product = currentProduct;
     
-    // Tamaños
     document.querySelectorAll('.size-option').forEach(option => {
         option.addEventListener('click', function() {
             document.querySelectorAll('.size-option').forEach(o => o.classList.remove('selected'));
@@ -323,7 +324,6 @@ function setupPizzaListeners() {
         });
     });
     
-    // Ingredientes
     document.querySelectorAll('.ingredient-option').forEach(option => {
         option.addEventListener('click', function() {
             const ingredient = this.getAttribute('data-value');
@@ -346,7 +346,6 @@ function setupPizzaListeners() {
         });
     });
     
-    // Opciones genéricas
     document.querySelectorAll('.option-item').forEach(option => {
         option.addEventListener('click', function() {
             const optionKey = this.getAttribute('data-option-key');
@@ -365,7 +364,6 @@ function setupPizzaListeners() {
         });
     });
     
-    // Cantidad
     document.getElementById('decreaseQty')?.addEventListener('click', () => {
         if (productConfig.quantity > 1) {
             productConfig.quantity--;
@@ -380,7 +378,6 @@ function setupPizzaListeners() {
         updateTotalPrice();
     });
     
-    // Botón agregar
     document.getElementById('addToCartBtn')?.addEventListener('click', () => {
         if (validateProduct()) {
             addConfiguredProductToCart();
@@ -439,14 +436,12 @@ function updateTotalPrice() {
         basePrice = productConfig.size.price;
     }
     
-    // Agregar precio de opciones con precio variable
     Object.values(productConfig.options).forEach(option => {
         if (typeof option === 'object' && option.price) {
             basePrice = option.price;
         }
     });
     
-    // Agregar extras
     productConfig.extras.forEach(extra => {
         basePrice += extra.price;
     });
@@ -458,7 +453,6 @@ function updateTotalPrice() {
         totalPriceElement.textContent = total;
     }
     
-    // Validar ingredientes requeridos
     const addButton = document.getElementById('addToCartBtn');
     if (product.ingredients && product.maxIngredients && addButton) {
         const hasRequiredIngredients = productConfig.ingredients.length > 0;
@@ -484,7 +478,7 @@ function checkRequiredOptions() {
     }
 }
 
-// Validar producto antes de agregar
+// Validar producto
 function validateProduct() {
     const product = currentProduct;
     
@@ -631,7 +625,7 @@ function renderCart() {
                 <span class="cart-total-label">Total:</span>
                 <span class="cart-total-price">$${getCartTotal()}</span>
             </div>
-            <button class="checkout-btn">Continuar al Pago</button>
+            <button class="checkout-btn" id="checkoutBtn">Continuar al Pago</button>
             <button class="continue-shopping-btn" id="continueShopping">Seguir Comprando</button>
         </div>
     `;
@@ -648,6 +642,197 @@ function renderCart() {
     document.getElementById('continueShopping')?.addEventListener('click', () => {
         hideCartModal();
     });
+    
+    document.getElementById('checkoutBtn')?.addEventListener('click', () => {
+        proceedToCheckout();
+    });
+}
+
+// Proceder al pago - Mostrar sucursal más cercana
+function proceedToCheckout() {
+    hideCartModal();
+    
+    const modalBody = document.getElementById('branchModalBody');
+    modalBody.innerHTML = `
+        <div class="loading-branch">
+            <div class="spinner"></div>
+            <p>Buscando sucursal más cercana...</p>
+        </div>
+    `;
+    
+    branchModal.classList.add('show');
+    
+    // Obtener sucursal más cercana directamente
+    getNearestBranchLocal()
+        .then(branch => {
+            selectedBranch = branch;
+            renderBranchSelection(branch);
+        })
+        .catch(error => {
+            console.error('Error al obtener sucursal:', error);
+            renderBranchError(error);
+        });
+}
+
+// Función local para obtener sucursal más cercana
+function getNearestBranchLocal() {
+    return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+            reject(new Error('Geolocalización no soportada'));
+            return;
+        }
+        
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const userLat = position.coords.latitude;
+                const userLon = position.coords.longitude;
+                
+                try {
+                    // Cargar sucursales desde JSON (ajusta la ruta según tu estructura)
+                    const response = await fetch('../Sucursales/sucursales.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    
+                    let minDist = Infinity;
+                    let nearest = null;
+                    
+                    data.sucursales.forEach(sucursal => {
+                        if (sucursal.abierto) {
+                            const d = haversineDistance(userLat, userLon, sucursal.lat, sucursal.lng);
+                            if (d < minDist) {
+                                minDist = d;
+                                nearest = { ...sucursal, distance: Math.round(d) };
+                            }
+                        }
+                    });
+                    
+                    if (nearest) {
+                        resolve(nearest);
+                    } else {
+                        reject(new Error('No se encontraron sucursales abiertas'));
+                    }
+                } catch (error) {
+                    reject(new Error('Error al cargar sucursales'));
+                }
+            },
+            (error) => {
+                reject(error);
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+        );
+    });
+}
+
+// Función Haversine para calcular distancia
+function haversineDistance(lat1, lon1, lat2, lon2) {
+    const toRad = v => v * Math.PI / 180;
+    const R = 6371000; // Radio de la Tierra en metros
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+              Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+}
+
+// Renderizar selección de sucursal
+function renderBranchSelection(branch) {
+    const modalBody = document.getElementById('branchModalBody');
+    
+    modalBody.innerHTML = `
+        <div class="branch-selection">
+            <div class="branch-header">
+                <h3>Sucursal más cercana</h3>
+                <p class="branch-distance">📍 A ${(branch.distance / 1000).toFixed(1)} km de tu ubicación</p>
+            </div>
+            
+            <div class="branch-card-selected">
+                <h4>${branch.nombre}</h4>
+                <div class="branch-info">
+                    <p>📍 ${branch.direccion}</p>
+                    <p>📞 ${branch.tel}</p>
+                    <p>🕐 ${branch.horario}</p>
+                </div>
+            </div>
+            
+            <div class="branch-actions">
+                <button class="confirm-branch-btn" id="confirmBranchBtn">
+                    Confirmar Sucursal
+                </button>
+                <button class="change-branch-btn" id="changeBranchBtn">
+                    Ver Todas las Sucursales
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('confirmBranchBtn').addEventListener('click', () => {
+        confirmBranch(branch);
+    });
+    
+    document.getElementById('changeBranchBtn').addEventListener('click', () => {
+        goToMapPage();
+    });
+}
+
+// Renderizar error de sucursal
+function renderBranchError(error) {
+    const modalBody = document.getElementById('branchModalBody');
+    
+    let errorMessage = 'No se pudo obtener tu ubicación.';
+    
+    if (error.code === 1) {
+        errorMessage = 'Necesitamos acceso a tu ubicación para encontrar la sucursal más cercana.';
+    } else if (error.code === 2) {
+        errorMessage = 'No se pudo determinar tu ubicación actual.';
+    } else if (error.code === 3) {
+        errorMessage = 'Se agotó el tiempo de espera al obtener tu ubicación.';
+    }
+    
+    modalBody.innerHTML = `
+        <div class="branch-error">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#e74c3c" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <h3>Error de ubicación</h3>
+            <p>${errorMessage}</p>
+            <button class="view-map-btn" id="viewMapBtn">
+                Ver Mapa de Sucursales
+            </button>
+        </div>
+    `;
+    
+    document.getElementById('viewMapBtn').addEventListener('click', () => {
+        goToMapPage();
+    });
+}
+
+// Confirmar sucursal y proceder
+function confirmBranch(branch) {
+    // Aquí puedes procesar el pedido con la sucursal seleccionada
+    alert(`Pedido confirmado para la sucursal: ${branch.nombre}\n\nTotal: $${getCartTotal()}\n\n¡Gracias por tu compra!`);
+    
+    // Limpiar carrito
+    cart = [];
+    updateCartUI();
+    hideBranchModal();
+}
+
+// Ir a la página del mapa
+function goToMapPage() {
+    // Guardar el carrito antes de ir al mapa
+    localStorage.setItem('tempCart', JSON.stringify(cart));
+    // Redirigir a la página del mapa con parámetro para selección
+    window.location.href = '../Sucursales/index.html?select=true';
 }
 
 // Eliminar del carrito
@@ -666,4 +851,9 @@ function hidePizzaModal() {
 
 function hideCartModal() {
     cartModal.classList.remove('show');
+}
+
+function hideBranchModal() {
+    branchModal.classList.remove('show');
+    selectedBranch = null;
 }

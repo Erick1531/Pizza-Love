@@ -5,14 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pizza & Love - Sucursales</title>
 
-    <!-- Navegación -->
+   
     <link rel="stylesheet" href="../Nav/nav.css">
-    <script>
-        fetch("../Nav/nav.html")
-            .then(response => response.text())
-            .then(data => document.getElementById("navbar").innerHTML = data)
-            .catch(err => console.error('Error cargando navbar:', err));
-    </script>
 
     <!-- Estilos y Leaflet -->
     <link rel="stylesheet" href="lib/leaflet-1.9.4/leaflet.css">
@@ -35,5 +29,8 @@
 
     <script src="lib/leaflet-1.9.4/leaflet-src.js"></script>
     <script src="script.js"></script>
+
+    
+    <script src="sucursales.js"></script>
 </body>
 </html>
