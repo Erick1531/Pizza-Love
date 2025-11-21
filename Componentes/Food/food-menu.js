@@ -707,7 +707,7 @@ function renderCart() {
     });
 }
 
-// Proceder al pago - Mostrar sucursal más cercana
+// Proceder al pago - Mostrar lista de sucursales
 function proceedToCheckout() {
     hideCartModal();
     
@@ -715,22 +715,109 @@ function proceedToCheckout() {
     modalBody.innerHTML = `
         <div class="loading-branch">
             <div class="spinner"></div>
-            <p>Buscando sucursal más cercana...</p>
+            <p>Cargando sucursales...</p>
         </div>
     `;
     
     branchModal.classList.add('show');
     
-    // Obtener sucursal más cercana directamente
-    getNearestBranchLocal()
-        .then(branch => {
-            saveSelectedBranch(branch); // GUARDAR SUCURSAL EN SESSIONSTORAGE
-            renderBranchSelection(branch);
+    // Cargar y mostrar lista de sucursales
+    loadBranchesList()
+        .then(branches => {
+            renderBranchesList(branches);
         })
         .catch(error => {
-            console.error('Error al obtener sucursal:', error);
+            console.error('Error al cargar sucursales:', error);
             renderBranchError(error);
         });
+}
+
+// Cargar lista de sucursales desde JSON
+async function loadBranchesList() {
+    try {
+        const response = await fetch('../Sucursales/sucursales.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data.sucursales.filter(s => s.abierto);
+    } catch (error) {
+        throw new Error('Error al cargar sucursales');
+    }
+}
+
+// Renderizar lista de sucursales
+function renderBranchesList(branches) {
+    const modalBody = document.getElementById('branchModalBody');
+    
+    let html = `
+        <div class="branch-list-container">
+            <div class="branch-list-header">
+                <h3>Selecciona tu sucursal</h3>
+                <button class="detect-nearest-btn" id="detectNearestBtn">
+                    📍 Detectar más cercana
+                </button>
+            </div>
+            
+            <div class="branches-list">
+    `;
+    
+    branches.forEach(branch => {
+        html += `
+            <div class="branch-list-item" data-branch='${JSON.stringify(branch)}'>
+                <div class="branch-list-info">
+                    <h4>${branch.nombre}</h4>
+                    <p>📍 ${branch.direccion}</p>
+                    <p>📞 ${branch.tel}</p>
+                    <p>🕐 ${branch.horario}</p>
+                </div>
+                <button class="select-branch-btn">Seleccionar</button>
+            </div>
+        `;
+    });
+    
+    html += `
+            </div>
+        </div>
+    `;
+    
+    modalBody.innerHTML = html;
+    
+    // Event listeners para seleccionar sucursal
+    modalBody.querySelectorAll('.select-branch-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const branchItem = this.closest('.branch-list-item');
+            const branchData = JSON.parse(branchItem.getAttribute('data-branch'));
+            // Marcar que fue selección manual (sin distancia)
+            branchData.isManualSelection = true;
+            saveSelectedBranch(branchData);
+            renderBranchSelection(branchData);
+        });
+    });
+    
+    // Event listener para detectar sucursal más cercana
+    document.getElementById('detectNearestBtn').addEventListener('click', () => {
+        const modalBody = document.getElementById('branchModalBody');
+        modalBody.innerHTML = `
+            <div class="loading-branch">
+                <div class="spinner"></div>
+                <p>Detectando sucursal más cercana...</p>
+            </div>
+        `;
+        
+        getNearestBranchLocal()
+            .then(branch => {
+                // Marcar que fue detección automática (con distancia)
+                branch.isManualSelection = false;
+                saveSelectedBranch(branch);
+                renderBranchSelection(branch);
+            })
+            .catch(error => {
+                console.error('Error al obtener sucursal:', error);
+                renderBranchError(error);
+            });
+    });
 }
 
 // Función local para obtener sucursal más cercana
@@ -805,11 +892,16 @@ function haversineDistance(lat1, lon1, lat2, lon2) {
 function renderBranchSelection(branch) {
     const modalBody = document.getElementById('branchModalBody');
     
+    // Mostrar distancia solo si NO fue selección manual
+    const distanceHTML = (!branch.isManualSelection && branch.distance) 
+        ? `<p class="branch-distance">📍 A ${(branch.distance / 1000).toFixed(1)} km de tu ubicación</p>`
+        : '';
+    
     modalBody.innerHTML = `
         <div class="branch-selection">
             <div class="branch-header">
-                <h3>Sucursal más cercana</h3>
-                <p class="branch-distance">📍 A ${(branch.distance / 1000).toFixed(1)} km de tu ubicación</p>
+                <h3>Sucursal ${branch.isManualSelection ? 'seleccionada' : 'más cercana'}</h3>
+                ${distanceHTML}
             </div>
             
             <div class="branch-card-selected">
@@ -826,7 +918,7 @@ function renderBranchSelection(branch) {
                     Confirmar Sucursal
                 </button>
                 <button class="change-branch-btn" id="changeBranchBtn">
-                    Ver Todas las Sucursales
+                    Seleccionar Otra Sucursal
                 </button>
             </div>
         </div>
@@ -837,7 +929,15 @@ function renderBranchSelection(branch) {
     });
     
     document.getElementById('changeBranchBtn').addEventListener('click', () => {
-        goToMapPage();
+        // Volver a mostrar la lista de sucursales
+        loadBranchesList()
+            .then(branches => {
+                renderBranchesList(branches);
+            })
+            .catch(error => {
+                console.error('Error al cargar sucursales:', error);
+                renderBranchError(error);
+            });
     });
 }
 
@@ -865,13 +965,19 @@ function renderBranchError(error) {
             <h3>Error de ubicación</h3>
             <p>${errorMessage}</p>
             <button class="view-map-btn" id="viewMapBtn">
-                Ver Mapa de Sucursales
+                Ver Lista de Sucursales
             </button>
         </div>
     `;
     
     document.getElementById('viewMapBtn').addEventListener('click', () => {
-        goToMapPage();
+        loadBranchesList()
+            .then(branches => {
+                renderBranchesList(branches);
+            })
+            .catch(error => {
+                console.error('Error al cargar sucursales:', error);
+            });
     });
 }
 
@@ -918,108 +1024,4 @@ function hideCartModal() {
 function hideBranchModal() {
     branchModal.classList.remove('show');
     // No limpiar selectedBranch aquí, solo al confirmar o cancelar
-}
-
-// Proceder al pago - Mostrar lista de sucursales
-function proceedToCheckout() {
-    hideCartModal();
-    
-    const modalBody = document.getElementById('branchModalBody');
-    modalBody.innerHTML = `
-        <div class="loading-branch">
-            <div class="spinner"></div>
-            <p>Cargando sucursales...</p>
-        </div>
-    `;
-    
-    branchModal.classList.add('show');
-    
-    // Cargar y mostrar lista de sucursales
-    loadBranchesList()
-        .then(branches => {
-            renderBranchesList(branches);
-        })
-        .catch(error => {
-            console.error('Error al cargar sucursales:', error);
-            renderBranchError(error);
-        });
-}
-
-// Cargar lista de sucursales desde JSON
-async function loadBranchesList() {
-    try {
-        const response = await fetch('../Sucursales/sucursales.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        return data.sucursales.filter(s => s.abierto);
-    } catch (error) {
-        throw new Error('Error al cargar sucursales');
-    }
-}
-
-// Renderizar lista de sucursales
-function renderBranchesList(branches) {
-    const modalBody = document.getElementById('branchModalBody');
-    
-    let html = `
-        <div class="branch-list-container">
-            <div class="branch-list-header">
-                <h3>Selecciona tu sucursal</h3>
-                <button class="detect-nearest-btn" id="detectNearestBtn">
-                    📍 Detectar más cercana
-                </button>
-            </div>
-            
-            <div class="branches-list">
-    `;
-    
-    branches.forEach(branch => {
-        html += `
-            <div class="branch-list-item" data-branch='${JSON.stringify(branch)}'>
-                <h4>${branch.nombre}</h4>
-                <button class="select-branch-btn">Seleccionar</button>
-            </div>
-        `;
-    });
-    
-    html += `
-            </div>
-        </div>
-    `;
-    
-    modalBody.innerHTML = html;
-    
-    // Event listeners para seleccionar sucursal
-    modalBody.querySelectorAll('.select-branch-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const branchItem = this.closest('.branch-list-item');
-            const branchData = JSON.parse(branchItem.getAttribute('data-branch'));
-            saveSelectedBranch(branchData);
-            renderBranchSelection(branchData);
-        });
-    });
-    
-    // Event listener para detectar sucursal más cercana
-    document.getElementById('detectNearestBtn').addEventListener('click', () => {
-        const modalBody = document.getElementById('branchModalBody');
-        modalBody.innerHTML = `
-            <div class="loading-branch">
-                <div class="spinner"></div>
-                <p>Detectando sucursal más cercana...</p>
-            </div>
-        `;
-        
-        getNearestBranchLocal()
-            .then(branch => {
-                saveSelectedBranch(branch);
-                renderBranchSelection(branch);
-            })
-            .catch(error => {
-                console.error('Error al obtener sucursal:', error);
-                renderBranchError(error);
-            });
-    });
 }
